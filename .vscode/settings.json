@@ -1,0 +1,10 @@
+{
+    "go.useLanguageServer": true,
+    "go.testEnvVars": {
+        "PG_CONF_FILE": "${workspaceFolder}/configs/app.yml"
+    },
+    "go.testFlags": [
+        "-count=1",
+        "-v"
+    ]
+}

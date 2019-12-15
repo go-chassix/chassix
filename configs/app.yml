@@ -1,0 +1,38 @@
+app:
+  name: xxxx
+  version: 1.1.0
+server:
+  port: 8000
+  address: 0.0.0.0
+logging:
+  level: 5  #0 panic 0 fatal 1 error 2 warn 3 info 4 debug 5 trace 6
+  report-caller: false
+database:
+  dsn: root:@tcp(localhost:3306)/test?parseTime=true
+  maxIndle: 10
+  maxOpen: 50
+  maxLifetime: 50  #单位秒 If d <= 0, connections are reused forever.  
+openapi:
+  spec:
+    title: Your service name
+    desc: api docs
+    contact:
+      name: your-name
+      email: your-mail
+      url: https://exmaple.org
+    version: 1.0
+  tags:
+    - name: Users
+      desc: "User resource"
+    - name: Orders
+      desc: "Order resource"
+  ui:
+    api: /apidocs.json
+    dist: /Users/liwei/MyWorkspace/swagger-ui/dist/
+    entrypoint: /apidocs/
+mail:
+  - imap-addr: imap.example.com:993
+    smtp-addr: smtp.example.com:465
+    tls: true
+    username: your-mail
+    password: your-mail-pwd

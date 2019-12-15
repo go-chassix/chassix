@@ -20,6 +20,7 @@ type Config struct {
 	Openapi  OpenapiConfig
 	Server   ServerConfig
 	Logging  LoggingConfig
+	Mails    []*MailConfig `yaml:"mail,flow"`
 }
 
 //LoggingConfig log config
@@ -75,6 +76,15 @@ type OpenapiTagConfig struct {
 	Description string `yaml:"desc"`
 }
 
+//MailConfig mail config
+type MailConfig struct {
+	IMAPAddr string `yaml:"imap-addr"`
+	SMTPAddr string `yaml:"smtp-addr"`
+	TLS      bool   `yaml:"tls"`
+	Username string
+	Password string
+}
+
 var config Config
 
 //App app config
@@ -100,4 +110,9 @@ func Database() *DatabaseConfig {
 //Logging log config
 func Logging() *LoggingConfig {
 	return &config.Logging
+}
+
+//Mails mail settings
+func Mails() []*MailConfig {
+	return config.Mails
 }
