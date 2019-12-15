@@ -5,7 +5,7 @@ import (
 	"github.com/emicklei/go-restful"
 	log "github.com/sirupsen/logrus"
 
-	"pgxs.io/panguxs/pkg/chassis/config"
+	"pgxs.io/chassis/config"
 )
 
 // var formatter = &zt_formatter.ZtFormatter{

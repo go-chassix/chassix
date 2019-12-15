@@ -7,10 +7,10 @@ import (
 	"github.com/emicklei/go-restful"
 	restfulspec "github.com/emicklei/go-restful-openapi"
 	"github.com/go-openapi/spec"
-	log "gopkg.in/logger.v1"
 
-	"pgxs.io/panguxs/pkg/chassis/config"
-	restfilters "pgxs.io/panguxs/pkg/chassis/filters/rest"
+	"pgxs.io/chassis/config"
+	restfilters "pgxs.io/chassis/filters/rest"
+	xLog "pgxs.io/chassis/log"
 )
 
 const (
@@ -59,6 +59,7 @@ func newPostBuildOpenAPIObjectFunc() restfulspec.PostBuildSwaggerObjectFunc {
 
 //Start rest webservice
 func Start(svcs []*restful.WebService) {
+	log := xLog.New().Service("chassis").Category("restful")
 
 	restful.Filter(restfilters.RequestID)
 	restful.Filter(restfilters.MeasureTime)

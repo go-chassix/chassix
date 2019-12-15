@@ -4,14 +4,15 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
-	log "gopkg.in/logger.v1"
 
-	"pgxs.io/panguxs/pkg/chassis/config"
+	"pgxs.io/chassis/config"
+	xLog "pgxs.io/chassis/log"
 )
 
 var db *gorm.DB
 
 func connectDB() {
+	log := xLog.New().Service("chassis").Category("gorm")
 	dbCfg := config.Database()
 	var err error
 	db, err = gorm.Open("mysql", dbCfg.DSN)
