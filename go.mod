@@ -9,8 +9,8 @@ require (
 	github.com/go-openapi/spec v0.19.5
 	github.com/golang-migrate/migrate/v4 v4.7.0
 	github.com/jinzhu/gorm v1.9.11
+	github.com/json-iterator/go v1.1.8 // indirect
 	github.com/satori/go.uuid v1.2.0
 	github.com/sirupsen/logrus v1.4.2
-	gopkg.in/logger.v1 v1.0.1
 	gopkg.in/yaml.v2 v2.2.7
 )

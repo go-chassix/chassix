@@ -6,11 +6,14 @@ import (
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/mysql" //import mysql driver
 	bindata "github.com/golang-migrate/migrate/v4/source/go_bindata"
-	log "gopkg.in/logger.v1"
+	xLog "pgxs.io/chassis/log"
 )
+
 
 //Run new bindataInstance and UP
 func Run(assetNames []string, afn bindata.AssetFunc, dbURL string) error {
+	log := xLog.New().Service("chassis").Category("migrate")
+
 	// wrap assets in Resource
 	s := bindata.Resource(assetNames, afn)
 
