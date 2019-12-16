@@ -29,3 +29,17 @@ func LoadFromFile(fileName string) error {
 	}
 	return nil
 }
+
+//LoadConfigFromFile from file
+func LoadConfigFromFile(fileName string, config interface{}) error {
+	f, err := os.Open(fileName)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	if err := yaml.NewDecoder(f).Decode(config); err != nil {
+		return err
+	}
+	return nil
+}
