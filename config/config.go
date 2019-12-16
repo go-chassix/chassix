@@ -31,7 +31,9 @@ type LoggingConfig struct {
 
 //AppConfig application config
 type AppConfig struct {
-	Name string
+	Name    string
+	Version string
+	Env     string
 }
 
 //ServerConfig server config
