@@ -78,7 +78,7 @@ type JSONTime time.Time
 
 // MarshalJSON json解码
 func (j JSONTime) MarshalJSON() ([]byte, error) {
-	return []byte(`"` + time.Time(j).Format("2006-01-02 15:04:05") + `"`), nil
+	return []byte(`"` + time.Time(j).Local().Format("2006-01-02 15:04:05") + `"`), nil
 }
 
 // JSONDate 格式化输出时间
@@ -86,5 +86,5 @@ type JSONDate time.Time
 
 // MarshalJSON json解码
 func (j JSONDate) MarshalJSON() ([]byte, error) {
-	return []byte(`"` + time.Time(j).Format("2006-01-02") + `"`), nil
+	return []byte(`"` + time.Time(j).Local().Format("2006-01-02") + `"`), nil
 }
