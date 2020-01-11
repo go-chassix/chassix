@@ -114,16 +114,16 @@ func AddMetaDataTags(ws *restful.WebService, tags []string) {
 	}
 }
 
-//WriteResponseEntitySample setting a webservice all routes to  write sample with ResponseEntity
-func WriteResponseEntitySample(ws *restful.WebService, entityType interface{}) {
+//AddWriteSample setting a webservice all routes to  write sample with ResponseEntity
+func AddWriteSample(ws *restful.WebService, entityType interface{}) {
 	routes := ws.Routes()
 	for i := range routes {
 		routes[i].WriteSample = ResponseEntitySample{Data: entityType}
 	}
 }
 
-// AddMetaDataTagsAndWriteResponseEntitySample  AddMetaDataTags() and  WriteSample
-func AddMetaDataTagsAndWriteResponseEntitySample(ws *restful.WebService, tags []string, entityType interface{}) {
+// AddMetaDataTagsAndWriteSample  AddMetaDataTags() and  WriteSample
+func AddMetaDataTagsAndWriteSample(ws *restful.WebService, tags []string, entityType interface{}) {
 	AddMetaDataTags(ws, tags)
-	WriteResponseEntitySample(ws, entityType)
+	AddWriteSample(ws, entityType)
 }
