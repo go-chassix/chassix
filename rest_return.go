@@ -11,6 +11,14 @@ type Entity struct {
 	Data interface{} `json:"data,omitempty"`
 }
 
+//ResponseEntity response entity for go-restful Writes(ResponseEntity{Data: Type{}})
+type ResponseEntity struct {
+	ErrCode int         `json:"err_code,omitempty"`
+	ErrMsg  string      `json:"err_msg,omitempty"`
+	ErrDesc string      `json:"err_desc,omitempty"`
+	Data    interface{} `json:"data,omitempty"`
+}
+
 //Response rest response
 type Response struct {
 	body       Entity
