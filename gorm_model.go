@@ -1,8 +1,9 @@
 package chassis
 
 import (
-	"github.com/jinzhu/gorm"
 	"time"
+
+	"github.com/jinzhu/gorm"
 )
 
 //Page page

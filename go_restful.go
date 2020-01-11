@@ -93,3 +93,23 @@ func PageQueryParamters(req *restful.Request) (pageIndex, pageSize uint) {
 	}
 	return
 }
+
+//AddMetaDataTags add metadata tags to Webservice all routes
+func AddMetaDataTags(ws *restful.WebService, tags []string) {
+	routes := ws.Routes()
+	for i, route := range routes {
+		if route.Metadata == nil {
+			routes[i].Metadata = map[string]interface{}{}
+		}
+		routeTags := routes[i].Metadata[KeyOpenAPITags]
+		if routeTags != nil {
+			existedTags, ok := routeTags.([]string)
+			if ok {
+				existedTags = append(existedTags, tags...)
+				routes[i].Metadata[KeyOpenAPITags] = existedTags
+			}
+			continue
+		}
+		routes[i].Metadata[KeyOpenAPITags] = tags
+	}
+}
