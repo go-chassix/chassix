@@ -18,8 +18,8 @@ type Response struct {
 	res        *restful.Response
 }
 
-//NewReturn new return
-func NewReturn(res *restful.Response) *Response {
+//NewResponse new return
+func NewResponse(res *restful.Response) *Response {
 	return &Response{res: res}
 }
 
