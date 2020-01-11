@@ -60,16 +60,16 @@ type SampleModel struct {
 
 //Model gorm model
 type Model struct {
-	ID        uint      `gorm:"primary_key" json:"id"`            // primary key
-	CreatedAt JSONTime  `json:"created_at,omitempty"`             // created time
-	UpdatedAt JSONTime  `json:"updated_at,omitempty"`             //updated time
-	DeletedAt *JSONTime `sql:"index" json:"deleted_at,omitempty"` //deleted time
-	Version   uint      `json:"version,omitempty"`                //version opt lock
+	ID        uint       `gorm:"primary_key" json:"id"`            // primary key
+	CreatedAt time.Time  `json:"created_at,omitempty"`             // created time
+	UpdatedAt time.Time  `json:"updated_at,omitempty"`             //updated time
+	DeletedAt *time.Time `sql:"index" json:"deleted_at,omitempty"` //deleted time
 }
 
 //ComplexModel gorm model composed Model add Addtion
 type ComplexModel struct {
 	Model
+	Version  uint   `json:"version"` //version opt lock
 	Addition string `json:"addition,omitempty"`
 }
 
