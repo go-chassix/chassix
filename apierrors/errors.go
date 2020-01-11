@@ -8,7 +8,7 @@ type APIError struct {
 }
 
 //DefaulAPIError default error for success.
-var DefaulAPIError = New(0, "successed", "OK")
+var DefaulAPIError = New(0, "Ok", "success")
 
 //New new api error
 func New(code int, msg, desc string) *APIError {

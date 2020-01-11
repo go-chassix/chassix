@@ -40,8 +40,9 @@ func (re *Response) Created(entity interface{}) {
 }
 
 //Error error response
-func (re *Response) Error(err *apierrors.APIError) {
+func (re *Response) Error(httpstatus int, err *apierrors.APIError) {
 	re.body.APIError = err
+	re.httpstatus = httpstatus
 	re.writeHeaderAndEntity()
 }
 func (re *Response) writeHeaderAndEntity() {
