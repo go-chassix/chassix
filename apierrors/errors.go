@@ -2,7 +2,7 @@ package apierrors
 
 //APIError custom http error
 type APIError struct {
-	Code int    `json:"err_code,omitempty"`
+	Code int    `json:"err_code"`
 	Msg  string `json:"err_msg,omitempty"`
 	Desc string `json:"err_desc,omitempty"`
 }
