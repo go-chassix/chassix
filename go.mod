@@ -6,6 +6,7 @@ require (
 	github.com/antonfisher/nested-logrus-formatter v1.0.2
 	github.com/emicklei/go-restful v2.11.1+incompatible
 	github.com/emicklei/go-restful-openapi v1.2.0
+	github.com/go-acme/lego/v3 v3.3.0 // indirect
 	github.com/go-openapi/spec v0.19.5
 	github.com/go-playground/validator/v10 v10.1.0
 	github.com/golang-migrate/migrate/v4 v4.7.0
