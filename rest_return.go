@@ -8,7 +8,7 @@ import (
 //Entity response entity
 type Entity struct {
 	*apierrors.APIError
-	Data interface{}
+	Data interface{} `json:"data,omitempty"`
 }
 
 //Response rest response
