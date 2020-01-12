@@ -127,3 +127,11 @@ func AddMetaDataTagsAndWriteSample(ws *restful.WebService, tags []string, entity
 	AddMetaDataTags(ws, tags)
 	AddWriteSample(ws, entityType)
 }
+
+//NewWriteSample new writesample
+func NewWriteSample(entity interface{}) ResponseEntitySample {
+
+	return ResponseEntitySample{
+		Data: entity,
+	}
+}

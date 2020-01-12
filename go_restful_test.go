@@ -1,6 +1,7 @@
 package chassis
 
 import (
+	"reflect"
 	"testing"
 
 	"github.com/emicklei/go-restful"
@@ -25,4 +26,14 @@ func Test_AddMetaDataTags(t *testing.T) {
 }
 
 func to(req *restful.Request, res *restful.Response) {
+}
+
+type TestEntity struct {
+	Foo string
+	Bar string
+}
+
+func Test_NewWriteSample(t *testing.T) {
+	entity := NewWriteSample([]TestEntity{})
+	assert.Equal(t, reflect.Slice, reflect.TypeOf(entity.Data).Kind())
 }
