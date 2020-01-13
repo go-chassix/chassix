@@ -20,6 +20,9 @@ openapi:
       name: your-name
       email: your-mail
       url: https://exmaple.org
+    license:
+      name: test
+      url: test
     version: 1.0
   tags:
     - name: Users

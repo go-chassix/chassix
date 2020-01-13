@@ -40,8 +40,8 @@ func newPostBuildOpenAPIObjectFunc() restfulspec.PostBuildSwaggerObjectFunc {
 					URL:   config.Openapi().Spec.Contact.URL,
 				},
 				License: &spec.License{
-					Name: "",
-					URL:  "",
+					Name: config.Openapi().Spec.License.Name,
+					URL:  config.Openapi().Spec.License.URL,
 				},
 				Version: config.Openapi().Spec.Version,
 			},

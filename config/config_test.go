@@ -14,6 +14,8 @@ func Test_Config(t *testing.T) {
 	fmt.Println((mails)[0])
 	assert.Len(t, mails, 1, "已设置1个邮箱配置")
 	assert.Equal(t, "imap.example.com:993", mails[0].IMAPAddr, "测试邮箱IMAP地址应为imap.example.com:993")
+	assert.Equal(t, "test", Openapi().Spec.License.Name)
+	assert.Equal(t, "test", Openapi().Spec.License.URL)
 
 }
 

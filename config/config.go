@@ -59,6 +59,10 @@ type OpenapiConfig struct {
 			Email string
 			URL   string
 		} `yaml:"contact"`
+		License struct {
+			Name string
+			URL  string
+		} `yaml:"license"`
 		Version string
 	}
 	Tags []OpenapiTagConfig `yaml:",flow"`
