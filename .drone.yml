@@ -6,3 +6,11 @@ steps:
   image: golang
   commands:
   - make test
+services:
+  - name: database
+    image: mysql
+    ports:
+      - 3306
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_DATABASE: test
