@@ -5,6 +5,7 @@ steps:
 - name: test
   image: golang
   commands:
+  - sleep 10
   - make test
 services:
   - name: database
