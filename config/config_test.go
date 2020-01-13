@@ -31,4 +31,5 @@ func Test_LoadConfigFromFile(t *testing.T) {
 	assert.NotNil(t, cfg)
 	assert.Equal(t, "1.1.0", cfg.App.Version)
 	assert.Equal(t, "root:@tcp(database:3306)/test?parseTime=true", cfg.Database.DSN)
+	assert.Equal(t, true, cfg.Database.ShowSQL)
 }

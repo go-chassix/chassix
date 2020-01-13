@@ -12,6 +12,7 @@ database:
   maxIndle: 10
   maxOpen: 50
   maxLifetime: 50  #单位秒 If d <= 0, connections are reused forever.  
+  showSQL: true
 openapi:
   spec:
     title: Your service name

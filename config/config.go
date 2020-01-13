@@ -47,6 +47,7 @@ type DatabaseConfig struct {
 	MaxIdle     int
 	MaxOpen     int
 	MaxLifetime int
+	ShowSQL     bool `yaml:"showSQL"`
 }
 
 //OpenapiConfig open api config

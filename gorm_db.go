@@ -20,7 +20,7 @@ func connectDB() {
 		//todo
 		log.Fatalln(err)
 	}
-	db.LogMode(true)
+	db.LogMode(dbCfg.ShowSQL)
 
 	if dbCfg.MaxIdle > 0 {
 		db.DB().SetMaxIdleConns(dbCfg.MaxIdle)
