@@ -1,6 +1,7 @@
 package chassis
 
 import (
+	"sync"
 	"time"
 
 	"github.com/jinzhu/gorm"
@@ -9,7 +10,10 @@ import (
 	xLog "pgxs.io/chassis/log"
 )
 
-var db *gorm.DB
+var (
+	db     *gorm.DB
+	dbOnce sync.Once
+)
 
 func connectDB() {
 	log := xLog.New().Service("chassis").Category("gorm")
@@ -35,10 +39,13 @@ func connectDB() {
 
 //DB get *Db
 func DB() *gorm.DB {
+	dbOnce.Do(func() {
+		connectDB()
+	})
 	return db
 }
 
 //Close close db
-func Close() error {
+func CloseDB() error {
 	return db.Close()
 }
