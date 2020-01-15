@@ -45,7 +45,7 @@ func Migrate(assetNames []string, afn bindata.AssetFunc, dbURL string) error {
 	//IF ENV NOT PROD IMPORT TEST DATA
 	if !EnvIsProd() {
 		fileName := os.Getenv(EnvPgTestDataFile)
-		log.Info(fileName)
+		log.Debugf("import data file: %s", fileName)
 		if fileName != "" {
 			if file, err := os.Open(fileName); err == nil {
 				// count := 0
