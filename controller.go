@@ -10,6 +10,11 @@ import (
 type BaseController struct {
 }
 
+//BaseResource RESTful webservice name ,alias BaseController.
+type BaseResource struct {
+	BaseController
+}
+
 //ValidateResourceID validate REST resource ID in pathparam and return it if validated.
 func (bc BaseController) ValidateResourceID(req *restful.Request, res *restful.Response, IDKey string) (ID uint, ok bool) {
 	intID, err := strconv.Atoi(req.PathParameter(IDKey))
