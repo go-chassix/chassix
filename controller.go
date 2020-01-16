@@ -29,7 +29,7 @@ func (bc BaseController) ValidateResourceID(req *restful.Request, res *restful.R
 func (bc BaseController) ValidatePageableParams(req *restful.Request, res *restful.Response) (pageable *Pageable, ok bool) {
 	pi, err := strconv.Atoi(req.QueryParameter("page_index"))
 	ps, err := strconv.Atoi(req.QueryParameter("page_size"))
-	if err != nil {
+	if err != nil || ps < 5 || ps > 100 || ps%5 != 0 {
 		NewResponse(res).Error(400, ErrPageParamsInvalid)
 		return nil, false
 	}
