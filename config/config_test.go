@@ -13,7 +13,7 @@ func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
 func setup() {
-	Instance().LoadFromEnvFile()
+	LoadFromEnvFile()
 }
 
 func TestConfig(t *testing.T) {

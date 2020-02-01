@@ -8,7 +8,7 @@ import (
 )
 
 //LoadEnvFile Load config from the file that path is saved in os env.
-func (cfg *Config) LoadFromEnvFile() {
+func LoadFromEnvFile() {
 	fileName := os.Getenv(configFileEnvKey)
 	if err := LoadFromFile(fileName); err != nil {
 		fmt.Printf("load file config error: %s\n", err)
