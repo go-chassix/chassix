@@ -20,7 +20,6 @@ import (
 // 	},
 // }
 
-// log := logrus.New()
 var formatter = &nested.Formatter{
 	HideKeys:        true,
 	FieldsOrder:     []string{"component", "category"},
@@ -48,26 +47,38 @@ func New() *Logger {
 	lg := &Logger{
 		Logger: nLog,
 	}
-	level := log.Level(config.Logging().Level)
-	if level >= log.DebugLevel {
-		formatter.HideKeys = false
+	if config.NotNil() {
+		level := log.Level(config.Logging().Level)
+		if level >= log.DebugLevel {
+			formatter.HideKeys = false
+		}
+		nLog.SetLevel(level)
+		nLog.SetReportCaller(config.Logging().ReportCaller)
 	}
-	nLog.SetFormatter(formatter)
-	nLog.SetLevel(level)
-	nLog.SetReportCaller(true)
-	// nLog.SetReportCaller(config.Logging().ReportCaller)
 
+	nLog.SetFormatter(formatter)
 	return lg
 }
 
+const (
+	fieldSvcKey = "service"
+	fieldComKey = "component"
+	fieldCatKey = "category"
+)
+
 //Service setting svc name
 func (l *Logger) Service(svc string) *Entry {
-	return &Entry{l.WithField("component", svc)}
+	return &Entry{l.WithField(fieldSvcKey, svc)}
+}
+
+//Component setting svc name
+func (l *Logger) Component(com string) *Entry {
+	return &Entry{l.WithField(fieldComKey, com)}
 }
 
 //Category setting svc name
 func (l *Logger) Category(name string) *Entry {
-	return &Entry{l.WithField("category", name)}
+	return &Entry{l.WithField(fieldCatKey, name)}
 }
 
 //SetReqInfo setting svc name
@@ -78,9 +89,14 @@ func (e *Entry) SetReqInfo(req *restful.Request) *Entry {
 	})}
 }
 
+//Component setting svc name
+func (e *Entry) Component(com string) *Entry {
+	return &Entry{e.WithField(fieldComKey, com)}
+}
+
 //Category setting svc name
 func (e *Entry) Category(name string) *Entry {
-	return &Entry{e.WithField("category", name)}
+	return &Entry{e.WithField(fieldCatKey, name)}
 }
 
 var defaultLogger = &Logger{

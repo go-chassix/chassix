@@ -6,15 +6,11 @@ import (
 	"github.com/emicklei/go-restful"
 	uuid "github.com/satori/go.uuid"
 
-	xLog "pgxs.io/chassis/log"
+	logger "pgxs.io/chassis/log"
 )
 
-var log *xLog.Entry
-
-func init() {
-	log = xLog.New().Service("chassis").Category("filter")
-
-}
+//var log *xLog.Entry
+var log = logger.New().Component("chassis").Category("filter")
 
 //RequestID Filter
 func RequestID(req *restful.Request, resp *restful.Response, chain *restful.FilterChain) {

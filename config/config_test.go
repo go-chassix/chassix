@@ -8,7 +8,15 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func Test_Config(t *testing.T) {
+func TestMain(m *testing.M) {
+	setup()
+	os.Exit(m.Run())
+}
+func setup() {
+	Instance().LoadFromEnvFile()
+}
+
+func TestConfig(t *testing.T) {
 	mails := Mails()
 	assert.NotNil(t, mails)
 	fmt.Println((mails)[0])
@@ -16,17 +24,16 @@ func Test_Config(t *testing.T) {
 	assert.Equal(t, "imap.example.com:993", mails[0].IMAPAddr, "测试邮箱IMAP地址应为imap.example.com:993")
 	assert.Equal(t, "test", Openapi().Spec.License.Name)
 	assert.Equal(t, "test", Openapi().Spec.License.URL)
-
 }
 
-func Test_LoadConfigFromFile(t *testing.T) {
+func TestConfig_LoadFromEnvFile(t *testing.T) {
 	fileName := os.Getenv(configFileEnvKey)
 	if err := LoadFromFile(fileName); err != nil {
 		fmt.Printf("load file config error: %s\n", err)
 		assert.NoError(t, err)
 	}
 	var cfg Config
-	err := LoadConfigFromFile(fileName, &cfg)
+	err := LoadCustomFromFile(fileName, &cfg)
 	assert.NoError(t, err)
 	assert.NotNil(t, cfg)
 	assert.Equal(t, "1.1.0", cfg.App.Version)

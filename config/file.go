@@ -7,8 +7,8 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-//loadFromEnv load config file from env
-func loadFromEnv() {
+//LoadEnvFile Load config from the file that path is saved in os env.
+func (cfg *Config) LoadFromEnvFile() {
 	fileName := os.Getenv(configFileEnvKey)
 	if err := LoadFromFile(fileName); err != nil {
 		fmt.Printf("load file config error: %s\n", err)
@@ -30,15 +30,15 @@ func LoadFromFile(fileName string) error {
 	return nil
 }
 
-//LoadConfigFromFile Load custom config from file
-func LoadConfigFromFile(fileName string, config interface{}) error {
+//LoadCustomFromFile Load custom config from file, save to custom config
+func LoadCustomFromFile(fileName string, customCfg interface{}) error {
 	f, err := os.Open(fileName)
 	if err != nil {
 		return err
 	}
 	defer f.Close()
 
-	if err := yaml.NewDecoder(f).Decode(config); err != nil {
+	if err := yaml.NewDecoder(f).Decode(customCfg); err != nil {
 		return err
 	}
 	return nil

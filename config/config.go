@@ -1,26 +1,33 @@
 package config
 
-const (
+import "sync"
+
+var (
 	configFileEnvKey = "PG_CONF_FILE"
+	config           *Config
+	configOnce       sync.Once
 )
 
-func init() {
-	//todo check config
-	loadFromEnv()
-}
-
-func initLog() {
-
+func Instance() *Config {
+	configOnce.Do(func() {
+		config = new(Config)
+	})
+	return config
 }
 
 //Config all config
 type Config struct {
 	App      AppConfig
 	Database DatabaseConfig
-	Openapi  OpenapiConfig
+	OpenAPI  OpenAPIConfig `yaml:"openapi"`
 	Server   ServerConfig
 	Logging  LoggingConfig
-	Mails    []*MailConfig `yaml:"mail,flow"`
+	Mails    []MailConfig `yaml:"mail,flow"`
+}
+
+//SetLoadFileEnvKey set env var name for read the config file path, default:PG_CONF_FILE
+func (cfg *Config) SetLoadFileEnvKey(key string) {
+	configFileEnvKey = key
 }
 
 //LoggingConfig log config
@@ -50,8 +57,8 @@ type DatabaseConfig struct {
 	ShowSQL     bool `yaml:"showSQL"`
 }
 
-//OpenapiConfig open api config
-type OpenapiConfig struct {
+//OpenAPIConfig open api config
+type OpenAPIConfig struct {
 	Spec struct {
 		Title       string
 		Description string `yaml:"desc"`
@@ -74,7 +81,7 @@ type OpenapiConfig struct {
 type OpenapiUIConfig struct {
 	API        string `yaml:"api"`
 	Dist       string
-	Entrypoint string
+	Entrypoint string `yaml:"entrypoint"`
 }
 
 //OpenapiTagConfig openapi tag
@@ -92,34 +99,38 @@ type MailConfig struct {
 	Password string
 }
 
-var config Config
-
 //App app config
-func App() *AppConfig {
-	return &config.App
+func App() AppConfig {
+	return config.App
 }
 
 //Server server config
-func Server() *ServerConfig {
-	return &config.Server
+func Server() ServerConfig {
+	return config.Server
 }
 
-//Openapi openapi config
-func Openapi() *OpenapiConfig {
-	return &config.Openapi
+//OpenAPI openapi config
+func Openapi() OpenAPIConfig {
+	return config.OpenAPI
 }
 
 //Database DB config
-func Database() *DatabaseConfig {
-	return &config.Database
+func Database() DatabaseConfig {
+	return config.Database
 }
 
 //Logging log config
-func Logging() *LoggingConfig {
-	return &config.Logging
+func Logging() LoggingConfig {
+	return config.Logging
 }
 
 //Mails mail settings
-func Mails() []*MailConfig {
+func Mails() []MailConfig {
 	return config.Mails
+}
+func IsNil() bool {
+	return config == nil
+}
+func NotNil() bool {
+	return config != nil
 }
