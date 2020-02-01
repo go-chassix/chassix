@@ -26,7 +26,7 @@ func TestConfig(t *testing.T) {
 	assert.Equal(t, "test", Openapi().Spec.License.URL)
 }
 
-func TestConfig_LoadFromEnvFile(t *testing.T) {
+func TestLoadFromEnvFile(t *testing.T) {
 	fileName := os.Getenv(configFileEnvKey)
 	if err := LoadFromFile(fileName); err != nil {
 		fmt.Printf("load file config error: %s\n", err)
