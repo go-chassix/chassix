@@ -1,18 +1,12 @@
 package config
 
-import "sync"
-
 var (
 	configFileEnvKey = "PG_CONF_FILE"
 	config           *Config
-	configOnce       sync.Once
 )
 
-func Instance() *Config {
-	configOnce.Do(func() {
-		config = new(Config)
-	})
-	return config
+func init() {
+	config = new(Config)
 }
 
 //Config all config
