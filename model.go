@@ -54,24 +54,22 @@ func NewPagination(db *gorm.DB, model interface{}, pageIndex, pageSize uint) *Pa
 	return nil
 }
 
-//SampleModel model with id pk
-type SampleModel struct {
+//SampleBaseDO model with id pk
+type SampleBaseDO struct {
 	ID uint `gorm:"primary_key" json:"id"`
 }
 
 //Model gorm model
-type Model struct {
+type BaseDO struct {
 	ID        uint       `gorm:"primary_key" json:"id"`            // primary key
 	CreatedAt time.Time  `json:"created_at,omitempty"`             // created time
 	UpdatedAt time.Time  `json:"updated_at,omitempty"`             //updated time
 	DeletedAt *time.Time `sql:"index" json:"deleted_at,omitempty"` //deleted time
 }
 
-//ComplexModel gorm model composed Model add Addtion
-type ComplexModel struct {
-	Model
+//ComplexBaseDO gorm model composed Model add Addition
+type ComplexBaseDO struct {
+	BaseDO
 	Version  uint   `json:"version"` //version opt lock
 	Addition string `json:"addition,omitempty"`
 }
-
-
