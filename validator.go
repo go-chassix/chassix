@@ -47,11 +47,14 @@ func ValidateTranslator() ut.Translator {
 }
 
 //ValidateEntity validate entity
-func ValidateEntity(res *restful.Response, entity interface{}, apiErr *apierrors.APIError) error {
+func ValidateEntity(entity interface{}) error {
+	return Validate().Struct(entity)
+}
 
+//ValidateEntityAndWriteResp validate entity and write header and error as entity
+func ValidateEntityAndWriteResp(res *restful.Response, entity interface{}, apiErr *apierrors.APIError) error {
 	err := Validate().Struct(entity)
 	if err != nil {
-
 		errs := err.(validator.ValidationErrors)
 		customErr := *apiErr
 

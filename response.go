@@ -22,7 +22,7 @@ type ResponseEntitySample struct {
 //Response rest response
 type Response struct {
 	body       Entity
-	httpstatus int
+	httpStatus int
 	res        *restful.Response
 }
 
@@ -34,7 +34,7 @@ func NewResponse(res *restful.Response) *Response {
 //Ok 200 return
 func (re *Response) Ok(entity interface{}) {
 	re.body.Data = entity
-	re.httpstatus = 200
+	re.httpStatus = 200
 	re.body.APIError = apierrors.DefaulAPIError
 	re.writeHeaderAndEntity()
 }
@@ -42,17 +42,25 @@ func (re *Response) Ok(entity interface{}) {
 //Created 201 return
 func (re *Response) Created(entity interface{}) {
 	re.body.Data = entity
-	re.httpstatus = 201
+	re.httpStatus = 201
 	re.body.APIError = apierrors.DefaulAPIError
 	re.writeHeaderAndEntity()
 }
 
 //Error error response
-func (re *Response) Error(httpstatus int, err *apierrors.APIError) {
+func (re *Response) Error(status int, err *apierrors.APIError) {
 	re.body.APIError = err
-	re.httpstatus = httpstatus
+	re.httpStatus = status
+	re.writeHeaderAndEntity()
+}
+func (re *Response) Status(statusCode int) *Response {
+	re.httpStatus = statusCode
+	return re
+}
+func (re *Response) Entity(entity interface{}) {
+	re.body.Data = entity
 	re.writeHeaderAndEntity()
 }
 func (re *Response) writeHeaderAndEntity() {
-	re.res.WriteHeaderAndEntity(re.httpstatus, re.body)
+	re.res.WriteHeaderAndEntity(re.httpStatus, re.body)
 }
