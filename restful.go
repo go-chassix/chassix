@@ -61,8 +61,8 @@ func newPostBuildOpenAPIObjectFunc() restfulspec.PostBuildSwaggerObjectFunc {
 	}
 }
 
-//Start rest webservice
-func Start(svcs []*restful.WebService) {
+//Serve rest webservice
+func Serve(svc []*restful.WebService) {
 	log := xLog.New().Service("chassis").Category("restful")
 
 	restful.Filter(restfilters.RequestID)
@@ -71,7 +71,7 @@ func Start(svcs []*restful.WebService) {
 	ucfg := config.Openapi().UI
 	//定义swagger文档
 	cfg := restfulspec.Config{
-		WebServices:                   svcs, // you control what services are visible
+		WebServices:                   svc, // you control what services are visible
 		APIPath:                       ucfg.API,
 		PostBuildSwaggerObjectHandler: newPostBuildOpenAPIObjectFunc()}
 	restful.DefaultContainer.Add(restfulspec.NewOpenAPIService(cfg))
