@@ -20,8 +20,13 @@ type Config struct {
 }
 
 //SetLoadFileEnvKey set env var name for read the config file path, default:PG_CONF_FILE
-func (cfg *Config) SetLoadFileEnvKey(key string) {
+func SetLoadFileEnvKey(key string) {
 	configFileEnvKey = key
+}
+
+//LoadFileEnvKey load file env key
+func LoadFileEnvKey() string {
+	return configFileEnvKey
 }
 
 //LoggingConfig log config
