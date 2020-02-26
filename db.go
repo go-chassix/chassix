@@ -15,13 +15,10 @@ var (
 	dbOnce sync.Once
 )
 
-func connectDB() {
+func mustConnectDB(dbCfg config.DatabaseConfig) *gorm.DB {
 	log := xLog.New().Service("chassis").Category("gorm")
-	dbCfg := config.Database()
-	var err error
-	db, err = gorm.Open("mysql", dbCfg.DSN)
+	db, err := gorm.Open("mysql", dbCfg.DSN)
 	if err != nil {
-		//todo
 		log.Fatalln(err)
 	}
 	db.LogMode(dbCfg.ShowSQL)
@@ -35,12 +32,13 @@ func connectDB() {
 	if dbCfg.MaxLifetime > 0 {
 		db.DB().SetConnMaxLifetime(time.Duration(dbCfg.MaxLifetime) * time.Second)
 	}
+	return db
 }
 
 //DB get *Db
 func DB() *gorm.DB {
 	dbOnce.Do(func() {
-		connectDB()
+		db = mustConnectDB(config.Database())
 	})
 	return db
 }
@@ -48,4 +46,58 @@ func DB() *gorm.DB {
 //Close close db
 func CloseDB() error {
 	return db.Close()
+}
+
+type MultiDBSource struct {
+	lock sync.RWMutex
+	dbs  map[string]*gorm.DB
+}
+
+type DBSource struct {
+	cfg       *config.DatabaseConfig
+	dbs       *gorm.DB
+	connected bool
+}
+
+var (
+	dbs         *MultiDBSource
+	dbsInitOnce sync.Once
+)
+
+//DBs get all custom database
+func DBs() *MultiDBSource {
+	dbsInitOnce.Do(func() {
+		dbs = new(MultiDBSource)
+		dbs.dbs = make(map[string]*gorm.DB)
+	})
+	return dbs
+}
+
+//Set add a new or reset  database source for app
+func (s MultiDBSource) Set(name string, cfg config.DatabaseConfig) {
+	s.lock.Lock()
+	defer s.lock.Unlock()
+	db := mustConnectDB(cfg)
+	s.dbs[name] = db
+}
+
+//Get get db by name
+func (s MultiDBSource) Get(name string) (db *gorm.DB, ok bool) {
+	s.lock.RLock()
+	defer s.lock.RUnlock()
+
+	db = s.dbs[name]
+	if db != nil {
+		ok = true
+	}
+	return
+	ok = false
+	return
+}
+
+//Size get db size
+func (s MultiDBSource) Size() int {
+	s.lock.RUnlock()
+	defer s.lock.RUnlock()
+	return len(s.dbs)
 }
