@@ -1,5 +1,9 @@
 package config
 
+import (
+	"gopkg.in/apollo.v0"
+)
+
 var (
 	configFileEnvKey = "PG_CONF_FILE"
 	config           *Config
@@ -11,12 +15,13 @@ func init() {
 
 //Config all config
 type Config struct {
-	App       AppConfig
+	App      AppConfig
 	Databases []DatabaseConfig `yaml:"databases"`
-	OpenAPI   OpenAPIConfig    `yaml:"openapi"`
-	Server    ServerConfig
-	Logging   LoggingConfig
-	Mails     []MailConfig `yaml:"mail,flow"`
+	OpenAPI  OpenAPIConfig `yaml:"openapi"`
+	Server   ServerConfig
+	Logging  LoggingConfig
+	Mails    []MailConfig `yaml:"mail,flow"`
+	Apollo   ApolloConfig
 }
 
 //SetLoadFileEnvKey set env var name for read the config file path, default:PG_CONF_FILE
@@ -97,6 +102,17 @@ type MailConfig struct {
 	TLS      bool   `yaml:"tls"`
 	Username string
 	Password string
+}
+
+// IsApolloEnable is apollo enable
+func IsApolloEnable() bool {
+	return config.Apollo.Enable
+}
+
+// ApolloConfig apollo config
+type ApolloConfig struct {
+	Enable bool        `yaml:"enable"`
+	Conf   apollo.Conf `yaml:"conf"`
 }
 
 //App app config
