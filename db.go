@@ -1,13 +1,17 @@
 package chassis
 
 import (
+	"fmt"
 	"sync"
 	"time"
 
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
+	_ "github.com/jinzhu/gorm/dialects/sqlite"
 
 	"pgxs.io/chassis/config"
 	xLog "pgxs.io/chassis/log"
+
 )
 
 var (
@@ -17,7 +21,11 @@ var (
 
 func mustConnectDB(dbCfg config.DatabaseConfig) *gorm.DB {
 	log := xLog.New().Service("chassis").Category("gorm")
-	db, err := gorm.Open("mysql", dbCfg.DSN)
+	dialect := dbCfg.Dialect
+	if "" == dialect {
+		dialect = "mysql"
+	}
+	db, err := gorm.Open(dialect, dbCfg.DSN)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -60,17 +68,44 @@ type DBSource struct {
 }
 
 var (
-	dbs         *MultiDBSource
+	mdbs        *MultiDBSource
 	dbsInitOnce sync.Once
 )
 
 //DBs get all custom database
 func DBs() *MultiDBSource {
 	dbsInitOnce.Do(func() {
-		dbs = new(MultiDBSource)
-		dbs.dbs = make(map[string]*gorm.DB)
+		mdbs = new(MultiDBSource)
+		mdbs.dbs = make(map[string]*gorm.DB)
 	})
-	return dbs
+	return mdbs
+}
+
+func MDB(name string) *gorm.DB {
+	multiCfg := config.MultiDatabase()
+	if _, ok := multiCfg[name]; !ok {
+		panic(fmt.Sprintf("Cant't find database configuration for db %s", name))
+	}
+	dbsInitOnce.Do(func() {
+		mdbs = new(MultiDBSource)
+		mdbs.dbs = make(map[string]*gorm.DB, len(multiCfg))
+		mdbs.lock.Lock()
+		defer mdbs.lock.Unlock()
+		for k, v := range multiCfg {
+			mdbs.dbs[k] = mustConnectDB(v)
+		}
+	})
+	return mdbs.dbs[name]
+}
+
+//Close close multi database
+func CloseMDB() error {
+	for _, v := range mdbs.dbs {
+		if err := v.Close(); nil != err {
+			return err
+		}
+	}
+	return nil
 }
 
 //Set add a new or reset  database source for app
