@@ -11,5 +11,5 @@ Features:
 - [x] go-restufl
 - [x] YAML config files
 - [x] Validate
-- [ ] Migrate
-- [ ] API errors
+- [x] Migrate
+- [x] API errors
