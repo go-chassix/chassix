@@ -24,6 +24,11 @@ func TestConfig(t *testing.T) {
 	assert.Equal(t, "imap.example.com:993", mails[0].IMAPAddr, "测试邮箱IMAP地址应为imap.example.com:993")
 	assert.Equal(t, "test", Openapi().Spec.License.Name)
 	assert.Equal(t, "test", Openapi().Spec.License.URL)
+	if IsApolloEnable() {
+		t.Logf("Apollo enable")
+	} else {
+		t.Logf("Apollo disable")
+	}
 }
 
 func TestLoadFromEnvFile(t *testing.T) {

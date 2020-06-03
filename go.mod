@@ -17,5 +17,6 @@ require (
 	github.com/satori/go.uuid v1.2.0
 	github.com/sirupsen/logrus v1.4.2
 	github.com/stretchr/testify v1.4.0
+	gopkg.in/apollo.v0 v0.3.0
 	gopkg.in/yaml.v2 v2.2.7
 )
