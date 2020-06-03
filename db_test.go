@@ -8,16 +8,20 @@ import (
 	"testing"
 )
 
-func TestMDB(t *testing.T)  {
-	defer CloseMDB()
+func TestDBs(t *testing.T)  {
+	//defer CloseAllDB()
 	// given
 	fileName := os.Getenv("PG_CONF_FILE")
+	if "" == fileName {
+		fileName = "configs/app.yml"
+	}
 	if err := config.LoadFromFile(fileName); err != nil {
 		fmt.Printf("load file config error: %s\n", err)
 		assert.NoError(t, err)
 	}
 	// when
-	db1 := MDB("db1")
-	assert.NotNil(t, db1)
-	assert.Nil(t, db1.DB().Ping())
+	dbs, _ := DBs()
+	// then
+	assert.NotNil(t, dbs[1])
+	assert.Nil(t, dbs[1].DB().Ping())
 }

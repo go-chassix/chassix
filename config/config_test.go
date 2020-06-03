@@ -37,9 +37,7 @@ func TestLoadFromEnvFile(t *testing.T) {
 	assert.NoError(t, err)
 	assert.NotNil(t, cfg)
 	assert.Equal(t, "1.1.0", cfg.App.Version)
-	assert.Equal(t, "root:@tcp(database:3306)/test?parseTime=true", cfg.Database.DSN)
-	assert.Equal(t, ":memory:", cfg.MultiDatabase["db1"].DSN)
-	assert.Equal(t, ":memory:", cfg.MultiDatabase["db2"].DSN)
-	assert.Equal(t, "", cfg.MultiDatabase["db3"].DSN)
-	assert.Equal(t, true, cfg.Database.ShowSQL)
+	assert.Equal(t, "root:@tcp(database:3306)/test?parseTime=true", cfg.Databases[0].DSN)
+	assert.Equal(t, ":memory:", cfg.Databases[1].DSN)
+	assert.Equal(t, true, cfg.Databases[0].ShowSQL)
 }

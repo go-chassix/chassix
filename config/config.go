@@ -11,13 +11,12 @@ func init() {
 
 //Config all config
 type Config struct {
-	App      AppConfig
-	Database DatabaseConfig
-	MultiDatabase map[string]DatabaseConfig `yaml:"multi-database"`
-	OpenAPI  OpenAPIConfig `yaml:"openapi"`
-	Server   ServerConfig
-	Logging  LoggingConfig
-	Mails    []MailConfig `yaml:"mail,flow"`
+	App       AppConfig
+	Databases []DatabaseConfig `yaml:"databases"`
+	OpenAPI   OpenAPIConfig    `yaml:"openapi"`
+	Server    ServerConfig
+	Logging   LoggingConfig
+	Mails     []MailConfig `yaml:"mail,flow"`
 }
 
 //SetLoadFileEnvKey set env var name for read the config file path, default:PG_CONF_FILE
@@ -115,14 +114,9 @@ func Openapi() OpenAPIConfig {
 	return config.OpenAPI
 }
 
-//Database DB config
-func Database() DatabaseConfig {
-	return config.Database
-}
-
-//MultiDatabase Multi Database config
-func MultiDatabase() map[string]DatabaseConfig {
-	return config.MultiDatabase
+//Databases Multi Database config
+func Databases() []DatabaseConfig {
+	return config.Databases
 }
 
 //Logging log config
