@@ -7,12 +7,24 @@ server:
 logging:
   level: 5  #0 panic 0 fatal 1 error 2 warn 3 info 4 debug 5 trace 6
   report-caller: false
-database:
-  dsn: root:@tcp(database:3306)/test?parseTime=true
-  maxIndle: 10
-  maxOpen: 50
-  maxLifetime: 50  #单位秒 If d <= 0, connections are reused forever.  
-  showSQL: true
+#database:
+#  dsn: root:@tcp(database:3306)/test?parseTime=true
+#  maxIndle: 10
+#  maxOpen: 50
+#  maxLifetime: 50  #单位秒 If d <= 0, connections are reused forever.
+#  showSQL: true
+databases:
+  - dsn: root:@tcp(database:3306)/test?parseTime=true
+    maxIndle: 10
+    maxOpen: 50
+    maxLifetime: 50  #单位秒 If d <= 0, connections are reused forever.
+    showSQL: true
+  - dialect: 'sqlite3'
+    dsn: ':memory:'
+    maxIndle: 10
+    maxOpen: 50
+    maxLifetime: 50  #单位秒 If d <= 0, connections are reused forever.
+    showSQL: true
 openapi:
   spec:
     title: Your service name

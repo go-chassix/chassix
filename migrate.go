@@ -50,7 +50,11 @@ func Migrate(assetNames []string, afn bindata.AssetFunc, dbURL string) error {
 			if file, err := os.Open(fileName); err == nil {
 				// count := 0
 				if data, err := ioutil.ReadAll(file); err == nil {
-					DB().Exec(string(data))
+					if db, err := DB(); nil != err {
+						return err
+					} else {
+						db.Exec(string(data))
+					}
 				}
 			} else {
 				log.Error(err)

@@ -16,7 +16,7 @@ func init() {
 //Config all config
 type Config struct {
 	App      AppConfig
-	Database DatabaseConfig
+	Databases []DatabaseConfig `yaml:"databases"`
 	OpenAPI  OpenAPIConfig `yaml:"openapi"`
 	Server   ServerConfig
 	Logging  LoggingConfig
@@ -54,6 +54,7 @@ type ServerConfig struct {
 
 //DatabaseConfig db config
 type DatabaseConfig struct {
+	Dialect		string `yaml:"dialect"`
 	DSN         string `yaml:"dsn"`
 	MaxIdle     int
 	MaxOpen     int
@@ -129,9 +130,9 @@ func Openapi() OpenAPIConfig {
 	return config.OpenAPI
 }
 
-//Database DB config
-func Database() DatabaseConfig {
-	return config.Database
+//Databases Multi Database config
+func Databases() []DatabaseConfig {
+	return config.Databases
 }
 
 //Logging log config
