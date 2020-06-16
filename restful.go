@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"strconv"
 
+	restfulspec "github.com/emicklei/go-restful-openapi/v2"
 	"github.com/emicklei/go-restful/v3"
-	restfulspec "github.com/emicklei/go-restful-openapi"
 	"github.com/go-openapi/spec"
 
 	"pgxs.io/chassis/config"
@@ -35,17 +35,14 @@ func newPostBuildOpenAPIObjectFunc() restfulspec.PostBuildSwaggerObjectFunc {
 				Title:       config.Openapi().Spec.Title,
 				Description: config.Openapi().Spec.Description,
 				Contact: &spec.ContactInfo{
-					ContactInfoProps: spec.ContactInfoProps{
-						Name:  config.Openapi().Spec.Contact.Name,
-						Email: config.Openapi().Spec.Contact.Email,
-						URL:   config.Openapi().Spec.Contact.URL,
-					},
+					Name:  config.Openapi().Spec.Contact.Name,
+					Email: config.Openapi().Spec.Contact.Email,
+					URL:   config.Openapi().Spec.Contact.URL,
 				},
+
 				License: &spec.License{
-					LicenseProps: spec.LicenseProps{
-						Name: config.Openapi().Spec.License.Name,
-						URL:  config.Openapi().Spec.License.URL,
-					},
+					Name: config.Openapi().Spec.License.Name,
+					URL:  config.Openapi().Spec.License.URL,
 				},
 				Version: config.Openapi().Spec.Version,
 			},
