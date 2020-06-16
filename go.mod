@@ -4,8 +4,8 @@ go 1.13
 
 require (
 	github.com/antonfisher/nested-logrus-formatter v1.0.2
-	github.com/emicklei/go-restful v2.11.1+incompatible
 	github.com/emicklei/go-restful-openapi v1.2.0
+	github.com/emicklei/go-restful/v3 v3.1.0
 	github.com/go-openapi/spec v0.19.6
 	github.com/go-playground/locales v0.13.0
 	github.com/go-playground/universal-translator v0.17.0

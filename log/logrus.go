@@ -2,7 +2,7 @@ package log
 
 import (
 	nested "github.com/antonfisher/nested-logrus-formatter"
-	"github.com/emicklei/go-restful"
+	"github.com/emicklei/go-restful/v3"
 	log "github.com/sirupsen/logrus"
 
 	"pgxs.io/chassis/config"

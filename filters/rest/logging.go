@@ -3,7 +3,7 @@ package restfilters
 import (
 	"time"
 
-	"github.com/emicklei/go-restful"
+	"github.com/emicklei/go-restful/v3"
 	uuid "github.com/satori/go.uuid"
 
 	logger "pgxs.io/chassis/log"

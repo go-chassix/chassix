@@ -3,7 +3,7 @@ package chassis
 import (
 	"strconv"
 
-	"github.com/emicklei/go-restful"
+	"github.com/emicklei/go-restful/v3"
 )
 
 //BaseController has some basic methods
