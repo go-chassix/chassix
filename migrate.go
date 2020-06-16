@@ -12,7 +12,7 @@ import (
 )
 
 //Migrate Run new bindataInstance and UP
-func Migrate(assetNames []string, afn bindata.AssetFunc, dbURL string) error {
+func Migrate(assetNames []string, afn bindata.AssetFunc, dbURL, dialect string) error {
 	log := xLog.New().Service("chassis").Category("migrate")
 	// wrap assets in Resource
 	s := bindata.Resource(assetNames, afn)
@@ -23,7 +23,17 @@ func Migrate(assetNames []string, afn bindata.AssetFunc, dbURL string) error {
 		return errors.New("DB migrations build instance error")
 	}
 
-	m, err := migrate.NewWithSourceInstance("go-bindata", d, "mysql://"+dbURL)
+	databaseURL := ""
+	if dialect == "" || dialect == "mysql" {
+		databaseURL = "mysql://" + dbURL
+	}
+	if dialect == "sqlite3" {
+		databaseURL = "sqlite3://" + dbURL
+	}
+	if dialect == "postgres" {
+		databaseURL = "postgres://" + dbURL
+	}
+	m, err := migrate.NewWithSourceInstance("go-bindata", d, databaseURL)
 	if err != nil {
 		log.Error(err)
 		return errors.New("DB migrations build bindata instance error")
