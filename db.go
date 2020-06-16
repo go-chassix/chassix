@@ -6,16 +6,14 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/postgres"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
 
 	"pgxs.io/chassis/config"
 	xLog "pgxs.io/chassis/log"
 )
 
 type MultiDBSource struct {
-		lock sync.RWMutex
-		dbs  []*gorm.DB
+	lock sync.RWMutex
+	dbs  []*gorm.DB
 }
 
 var (
@@ -27,7 +25,7 @@ var (
 	initOnce      sync.Once
 )
 
-func initMultiDBSource()  {
+func initMultiDBSource() {
 	initOnce.Do(func() {
 		multiCfg := config.Databases()
 		multiDBSource = new(MultiDBSource)
