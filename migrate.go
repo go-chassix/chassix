@@ -75,3 +75,30 @@ func Migrate(assetNames []string, afn bindata.AssetFunc, dbURL, dialect string) 
 	}
 	return nil
 }
+
+//ExecSQLFile danger!!! just for importing test data.
+func ExecSQLFile(fileName string) error {
+	log := xLog.New().Service("chassis").Category("execsql")
+	if fileName != "" {
+		if file, err := os.Open(fileName); err == nil {
+			// count := 0
+			if data, err := ioutil.ReadAll(file); err == nil {
+				if db, err := DB(); nil != err {
+					return err
+				} else {
+					err = db.Exec(string(data)).Error
+					if err != nil {
+						return err
+					}
+				}
+			}
+		} else {
+			log.Error(err)
+			return err
+		}
+	} else {
+		log.Error("import test data failed")
+		return errors.New("import test data failed, file cannot be empty")
+	}
+	return nil
+}
