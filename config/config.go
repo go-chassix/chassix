@@ -15,13 +15,13 @@ func init() {
 
 //Config all config
 type Config struct {
-	App      AppConfig
-	Databases []DatabaseConfig `yaml:"databases"`
-	OpenAPI  OpenAPIConfig `yaml:"openapi"`
-	Server   ServerConfig
-	Logging  LoggingConfig
-	Mails    []MailConfig `yaml:"mail,flow"`
-	Apollo   ApolloConfig
+	App       AppConfig
+	Databases []*DatabaseConfig `yaml:"databases"`
+	OpenAPI   OpenAPIConfig     `yaml:"openapi"`
+	Server    ServerConfig
+	Logging   LoggingConfig
+	Mails     []MailConfig `yaml:"mail,flow"`
+	Apollo    ApolloConfig
 }
 
 //SetLoadFileEnvKey set env var name for read the config file path, default:PG_CONF_FILE
@@ -54,7 +54,7 @@ type ServerConfig struct {
 
 //DatabaseConfig db config
 type DatabaseConfig struct {
-	Dialect		string `yaml:"dialect"`
+	Dialect     string `yaml:"dialect"`
 	DSN         string `yaml:"dsn"`
 	MaxIdle     int
 	MaxOpen     int
@@ -131,7 +131,7 @@ func Openapi() OpenAPIConfig {
 }
 
 //Databases Multi Database config
-func Databases() []DatabaseConfig {
+func Databases() []*DatabaseConfig {
 	return config.Databases
 }
 

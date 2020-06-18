@@ -45,4 +45,6 @@ func TestLoadFromEnvFile(t *testing.T) {
 	assert.Equal(t, "root:@tcp(database:3306)/test?parseTime=true", cfg.Databases[0].DSN)
 	assert.Equal(t, ":memory:", cfg.Databases[1].DSN)
 	assert.Equal(t, true, cfg.Databases[0].ShowSQL)
+
+	assert.NotEmpty(t, cfg.Databases[2].DSN)
 }

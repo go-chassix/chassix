@@ -37,7 +37,7 @@ func initMultiDBSource() {
 	})
 }
 
-func mustConnectDB(dbCfg config.DatabaseConfig) *gorm.DB {
+func mustConnectDB(dbCfg *config.DatabaseConfig) *gorm.DB {
 	log := xLog.New().Service("chassis").Category("gorm")
 	dialect := dbCfg.Dialect
 	if "" == dialect {
