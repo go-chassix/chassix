@@ -135,6 +135,14 @@ func Databases() []*DatabaseConfig {
 	return config.Databases
 }
 
+//Database first database config
+func Database() *DatabaseConfig {
+	if len(config.Databases) > 0 {
+		return config.Databases[0]
+	}
+	return nil
+}
+
 //Logging log config
 func Logging() LoggingConfig {
 	return config.Logging
