@@ -15,6 +15,7 @@ logging:
 #  showSQL: true
 databases:
   - dsn: root:@tcp(database:3306)/test?parseTime=true
+    dialect: 'mysql'
     maxIndle: 10
     maxOpen: 50
     maxLifetime: 50  #单位秒 If d <= 0, connections are reused forever.
@@ -25,7 +26,7 @@ databases:
     maxOpen: 50
     maxLifetime: 50  #单位秒 If d <= 0, connections are reused forever.
     showSQL: true
-  - dsn: "postgres://postgres:123456@localhost:5432/test?sslmode=disable"
+  - dsn: "postgres://postgres:@postgres:5432/test?sslmode=disable"
     dialect: 'postgres'
     maxIndle: 10
     maxOpen: 50

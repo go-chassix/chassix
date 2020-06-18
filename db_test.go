@@ -2,13 +2,17 @@ package chassis
 
 import (
 	"fmt"
-	"github.com/stretchr/testify/assert"
 	"os"
-	"pgxs.io/chassis/config"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"pgxs.io/chassis/config"
+
+	_ "github.com/jinzhu/gorm/dialects/postgres"
+	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 
-func TestDBs(t *testing.T)  {
+func TestDBs(t *testing.T) {
 	//defer CloseAllDB()
 	// given
 	fileName := os.Getenv("PG_CONF_FILE")
