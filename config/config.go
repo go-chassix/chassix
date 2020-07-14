@@ -38,6 +38,8 @@ func LoadFileEnvKey() string {
 type LoggingConfig struct {
 	Level        uint32
 	ReportCaller bool `yaml:"report-caller"`
+	NoColors     bool `yaml:"no-colors"`
+	CallerFirst  bool `yaml:"caller-first"`
 }
 
 //AppConfig application config

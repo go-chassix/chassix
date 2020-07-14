@@ -1,4 +1,4 @@
-package log
+package logx
 
 import (
 	nested "github.com/antonfisher/nested-logrus-formatter"
@@ -54,6 +54,10 @@ func New() *Logger {
 		}
 		nLog.SetLevel(level)
 		nLog.SetReportCaller(config.Logging().ReportCaller)
+		formatter.NoColors = config.Logging().NoColors
+		if config.Logging().ReportCaller {
+			formatter.CallerFirst = config.Logging().CallerFirst
+		}
 	}
 
 	nLog.SetFormatter(formatter)

@@ -24,6 +24,7 @@ func TestConfig(t *testing.T) {
 	assert.Equal(t, "imap.example.com:993", mails[0].IMAPAddr, "测试邮箱IMAP地址应为imap.example.com:993")
 	assert.Equal(t, "test", Openapi().Spec.License.Name)
 	assert.Equal(t, "test", Openapi().Spec.License.URL)
+	assert.False(t, Logging().NoColors)
 	if IsApolloEnable() {
 		t.Logf("Apollo enable")
 	} else {
@@ -45,6 +46,4 @@ func TestLoadFromEnvFile(t *testing.T) {
 	assert.Equal(t, "root:@tcp(database:3306)/test?parseTime=true", cfg.Databases[0].DSN)
 	assert.Equal(t, ":memory:", cfg.Databases[1].DSN)
 	assert.Equal(t, true, cfg.Databases[0].ShowSQL)
-
-	assert.NotEmpty(t, cfg.Databases[2].DSN)
 }

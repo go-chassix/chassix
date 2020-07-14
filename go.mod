@@ -3,7 +3,7 @@ module pgxs.io/chassis
 go 1.13
 
 require (
-	github.com/antonfisher/nested-logrus-formatter v1.0.2
+	github.com/antonfisher/nested-logrus-formatter v1.1.0
 	github.com/emicklei/go-restful-openapi/v2 v2.1.0
 	github.com/emicklei/go-restful/v3 v3.1.0
 	github.com/go-openapi/spec v0.19.5
@@ -15,7 +15,7 @@ require (
 	github.com/jinzhu/gorm v1.9.11
 	github.com/json-iterator/go v1.1.9 // indirect
 	github.com/satori/go.uuid v1.2.0
-	github.com/sirupsen/logrus v1.4.2
+	github.com/sirupsen/logrus v1.6.0
 	github.com/stretchr/testify v1.4.0
 	gopkg.in/apollo.v0 v0.3.0
 	gopkg.in/yaml.v2 v2.2.7
