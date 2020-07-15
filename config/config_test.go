@@ -25,6 +25,10 @@ func TestConfig(t *testing.T) {
 	assert.Equal(t, "test", Openapi().Spec.License.Name)
 	assert.Equal(t, "test", Openapi().Spec.License.URL)
 	assert.True(t, Logging().NoColors)
+	assert.Equal(t,10,Database().MaxIdle)
+	assert.Equal(t,50,Database().MaxOpen)
+	assert.Equal(t,50,Database().MaxLifetime)
+
 	if IsApolloEnable() {
 		t.Logf("Apollo enable")
 	} else {
