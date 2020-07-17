@@ -28,7 +28,7 @@ databases:
     maxOpen: 50
     maxLifetime: 50  #单位秒 If d <= 0, connections are reused forever.
     showSQL: true
-  - dsn: "postgres:postgres:123456@postgres:5432/test?sslmode=disable"
+  - dsn: "postgres://postgres:123456@postgres:5432/test?sslmode=disable"
     dialect: 'postgres'
     maxIdle: 10
     maxOpen: 50
