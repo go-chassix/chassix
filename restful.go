@@ -10,7 +10,7 @@ import (
 
 	"pgxs.io/chassis/config"
 	restfilters "pgxs.io/chassis/filters/rest"
-	xLog "pgxs.io/chassis/log"
+	xLog "pgxs.io/chassis/logx"
 )
 
 const (

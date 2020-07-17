@@ -8,7 +8,7 @@ import (
 	"github.com/jinzhu/gorm"
 
 	"pgxs.io/chassis/config"
-	xLog "pgxs.io/chassis/log"
+	xLog "pgxs.io/chassis/logx"
 )
 
 type MultiDBSource struct {

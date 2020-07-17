@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"gopkg.in/apollo.v0"
-	"gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v3"
 )
 
 //LoadEnvFile Load config from the file that path is saved in os env.

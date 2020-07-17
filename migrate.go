@@ -8,7 +8,7 @@ import (
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/mysql" //import mysql driver
 	bindata "github.com/golang-migrate/migrate/v4/source/go_bindata"
-	xLog "pgxs.io/chassis/log"
+	xLog "pgxs.io/chassis/logx"
 )
 
 //Migrate Run new bindataInstance and UP

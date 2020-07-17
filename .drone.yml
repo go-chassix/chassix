@@ -20,3 +20,5 @@ services:
     environment:
       POSTGRES_PASSWORD: 123456
       POSTGRES_DB: test
+  - name: redis
+    image: redis:5
