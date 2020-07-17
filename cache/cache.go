@@ -22,6 +22,7 @@ type Store interface {
 	Contains(key string) bool
 }
 
+//RedisCacheStore based redis implement cache store
 type RedisCacheStore struct {
 	prefix      string
 	valType     reflect.Type
@@ -30,6 +31,7 @@ type RedisCacheStore struct {
 	redisCfg    *config.RedisConfig
 }
 
+//Get get value from redis cache store
 func (rc *RedisCacheStore) Get(key string) (val interface{}, ok bool) {
 	ctx := context.Background()
 	valPtr := reflect.New(rc.valType)
@@ -58,6 +60,8 @@ func (rc *RedisCacheStore) Get(key string) (val interface{}, ok bool) {
 	ok = true
 	return
 }
+
+//Set add or update key value
 func (rc *RedisCacheStore) Set(key string, val interface{}) (ok bool) {
 	ctx := context.Background()
 	var buffer bytes.Buffer
@@ -76,6 +80,8 @@ func (rc *RedisCacheStore) Set(key string, val interface{}) (ok bool) {
 	ok = true
 	return
 }
+
+//Delete delete key value in redis cache store
 func (rc *RedisCacheStore) Delete(key string) {
 	if rc.redisCfg.Mode == "simple" || rc.redisCfg.Mode == "sentinel" {
 		chassis.RedisClient().Del(context.Background(), fmt.Sprintf("%s:%s", rc.prefix, key))
@@ -84,6 +90,7 @@ func (rc *RedisCacheStore) Delete(key string) {
 	}
 }
 
+//Contains check key existed in redis cache store
 func (rc *RedisCacheStore) Contains(key string) bool {
 	var result int64
 	if rc.redisCfg.Mode == "simple" || rc.redisCfg.Mode == "sentinel" {
@@ -93,7 +100,9 @@ func (rc *RedisCacheStore) Contains(key string) bool {
 	}
 	return result == 1
 }
-func NewRedisCache(name string, valType interface{}, expired time.Duration) Store {
+
+//NewRedisCacheStore new redis cache store
+func NewRedisCacheStore(name string, valType interface{}, expired time.Duration) Store {
 	gob.Register(valType)
 	t := reflect.TypeOf(valType)
 	if t.Kind() == reflect.Ptr {
