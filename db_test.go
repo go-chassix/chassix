@@ -14,6 +14,8 @@ func TestDBs(t *testing.T) {
 	//defer CloseAllDB()
 	// given
 	config.LoadFromEnvFile()
+	dbCfg := config.Databases()
+	assert.NotEmpty(t, dbCfg)
 	// when
 	dbs, _ := DBs()
 	// then
