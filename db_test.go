@@ -1,8 +1,6 @@
 package chassis
 
 import (
-	"fmt"
-	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -15,14 +13,7 @@ import (
 func TestDBs(t *testing.T) {
 	//defer CloseAllDB()
 	// given
-	fileName := os.Getenv("PG_CONF_FILE")
-	if "" == fileName {
-		fileName = "configs/app.yml"
-	}
-	if err := config.LoadFromFile(fileName); err != nil {
-		fmt.Printf("load file config error: %s\n", err)
-		assert.NoError(t, err)
-	}
+	config.LoadFromEnvFile()
 	// when
 	dbs, _ := DBs()
 	// then
