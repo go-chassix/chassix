@@ -1,32 +1,54 @@
 package chassis
 
 import (
+	"reflect"
+	"sync"
+	"time"
+
 	"github.com/go-redis/redis/v8"
 	"pgxs.io/chassis/config"
-	"reflect"
-	"time"
+)
+
+var (
+	redisClient         *redis.Client
+	redisClientInitOnce sync.Once
+
+	redisClusterClient         *redis.ClusterClient
+	redisClusterClientInitOnce sync.Once
 )
 
 //RedisClient get redis client
 //return for simple or sentinel(failover)mode
 func RedisClient() *redis.Client {
-	if config.NotNil() {
-		redisCfg := config.Redis()
+	redisClientInitOnce.Do(func() {
+		if config.NotNil() {
+			redisCfg := config.Redis()
 
-		switch redisCfg.Mode {
-		case "simple":
-			var opts redis.Options
-			readRedisOptions(&opts)
-			return redis.NewClient(&opts)
+			switch redisCfg.Mode {
+			case "simple":
+				var opts redis.Options
+				readRedisOptions(&opts)
+				redisClient = redis.NewClient(&opts)
 
-		case "sentinel":
-			var opts redis.FailoverOptions
-			readRedisOptions(&opts)
-			return redis.NewFailoverClient(&opts)
+			case "sentinel":
+				var opts redis.FailoverOptions
+				readRedisOptions(&opts)
+				redisClient = redis.NewFailoverClient(&opts)
+			}
 		}
+	})
 
-	}
-	return nil
+	return redisClient
+}
+
+//RedisClusterClient redis cluster client
+func RedisClusterClient() *redis.ClusterClient {
+	redisClusterClientInitOnce.Do(func() {
+		var opts redis.ClusterOptions
+		readRedisOptions(&opts)
+		redisClusterClient = redis.NewClusterClient(&opts)
+	})
+	return redisClusterClient
 }
 
 func readRedisOptions(opts interface{}) {
@@ -43,6 +65,8 @@ func readRedisOptions(opts interface{}) {
 			elem.FieldByName("SentinelPassword").Set(reflect.ValueOf(redisCfg.Sentinel.Password))
 			elem.FieldByName("MasterName").Set(reflect.ValueOf(redisCfg.Sentinel.Master))
 			elem.FieldByName("SentinelAddrs").Set(reflect.ValueOf(redisCfg.Sentinel.Addrs))
+		case "cluster":
+			//todo
 		}
 
 		elem.FieldByName("Username").Set(reflect.ValueOf(redisCfg.Username))
@@ -76,28 +100,6 @@ func readRedisOptions(opts interface{}) {
 				elem.FieldByName("IdleCheckFrequency").Set(reflect.ValueOf(t))
 			}
 		}
-
-		//opts.Username = redisCfg.Username
-		//
-		//opts.PoolSize = redisCfg.PoolSize
-		//opts.MinIdleConns = redisCfg.MinIdleConns
-
-		//
-		//if redisCfg.PoolTimeout != "" {
-		//	if t, err := time.ParseDuration(redisCfg.PoolTimeout); err == nil {
-		//		opts.PoolTimeout = t
-		//	}
-		//}
-		//
-
-		//
-		//if redisCfg.IdleCheckFrequency != "" {
-		//	if t, err := time.ParseDuration(redisCfg.IdleCheckFrequency); err == nil {
-		//		opts.IdleCheckFrequency = t
-		//	}
-		//}
-
-		//return opts
 
 	}
 }
