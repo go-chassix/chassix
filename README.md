@@ -1,8 +1,10 @@
-# Chassis
+# chassis-go 
+[![Build Status](https://cloud.drone.io/api/badges/chassisx/chassis-go/status.svg)](https://cloud.drone.io/chassisx/chassis-go)
 
-[![Build Status](https://cloud.drone.io/api/badges/pgxs/chassis/status.svg)](https://cloud.drone.io/pgxs/chassis)
+Integrate awesome go framework for developing web service
 
-pgxs go webservice chassis
+
+go webservice chassis
 
 Features:
 
@@ -10,5 +12,7 @@ Features:
 - [x] go-restufl
 - [x] YAML config files
 - [x] Validate
-- [x] Migrate
+- [x] DB migrate
 - [x] API errors
+- [x] Redis cache
+- [ ] Memory cache
