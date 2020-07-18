@@ -8,9 +8,9 @@ import (
 	"github.com/emicklei/go-restful/v3"
 	"github.com/go-openapi/spec"
 
-	"pgxs.io/chassis/config"
-	restfilters "pgxs.io/chassis/filters/rest"
-	xLog "pgxs.io/chassis/logx"
+	"c6x.io/chassis/config"
+	restfilters "c6x.io/chassis/filters/rest"
+	xLog "c6x.io/chassis/logx"
 )
 
 const (

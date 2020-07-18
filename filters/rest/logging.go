@@ -6,7 +6,7 @@ import (
 	"github.com/emicklei/go-restful/v3"
 	uuid "github.com/satori/go.uuid"
 
-	logger "pgxs.io/chassis/logx"
+	logger "c6x.io/chassis/logx"
 )
 
 //var log *xLog.Entry

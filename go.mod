@@ -1,4 +1,4 @@
-module pgxs.io/chassis
+module c6x.io/chassis
 
 go 1.13
 

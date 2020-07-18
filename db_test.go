@@ -3,11 +3,11 @@ package chassis
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-	"pgxs.io/chassis/config"
-
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	"github.com/stretchr/testify/assert"
+
+	"c6x.io/chassis/config"
 )
 
 func TestDBs(t *testing.T) {

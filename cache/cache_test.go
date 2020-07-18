@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
+	"c6x.io/chassis/config"
 	"github.com/stretchr/testify/assert"
-	"pgxs.io/chassis/config"
 )
 
 type testT struct {

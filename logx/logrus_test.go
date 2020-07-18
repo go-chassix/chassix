@@ -1,7 +1,7 @@
 package logx
 
 import (
-	"pgxs.io/chassis/config"
+	"c6x.io/chassis/config"
 	"testing"
 )
 

@@ -8,10 +8,10 @@ import (
 	"reflect"
 	"time"
 
-	"pgxs.io/chassis/config"
-	"pgxs.io/chassis/logx"
+	"c6x.io/chassis/config"
+	"c6x.io/chassis/logx"
 
-	"pgxs.io/chassis"
+	"c6x.io/chassis"
 )
 
 //Store cache store interface

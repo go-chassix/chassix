@@ -5,8 +5,8 @@ import (
 	"sync"
 	"time"
 
+	"c6x.io/chassis/config"
 	"github.com/go-redis/redis/v8"
-	"pgxs.io/chassis/config"
 )
 
 var (
