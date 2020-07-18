@@ -16,3 +16,8 @@ Features:
 - [x] API errors
 - [x] Redis cache
 - [ ] Memory cache
+
+usage:
+```
+go get c6x.io/chassis
+```
