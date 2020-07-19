@@ -3,19 +3,18 @@
 
 Integrate awesome go framework for developing web service
 
-
 go webservice chassis
 
 Features:
 
 - [x] gorm
-- [x] go-restufl
+- [x] go-restful
 - [x] YAML config files
 - [x] Validate
 - [x] DB migrate
 - [x] API errors
 - [x] Redis cache
-- [ ] Memory cache
+- [x] Memory cache
 
 usage:
 ```
