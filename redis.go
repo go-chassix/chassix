@@ -66,7 +66,11 @@ func readRedisOptions(opts interface{}) {
 			elem.FieldByName("MasterName").Set(reflect.ValueOf(redisCfg.Sentinel.Master))
 			elem.FieldByName("SentinelAddrs").Set(reflect.ValueOf(redisCfg.Sentinel.Addrs))
 		case "cluster":
-			//todo
+			elem.FieldByName("Addrs").Set(reflect.ValueOf(redisCfg.Cluster.Addrs))
+			elem.FieldByName("MaxRedirects").Set(reflect.ValueOf(redisCfg.Cluster.MaxRedirects))
+			elem.FieldByName("ReadOnly").Set(reflect.ValueOf(redisCfg.Cluster.ReadOnly))
+			elem.FieldByName("RouteByLatency").Set(reflect.ValueOf(redisCfg.Cluster.RouteByLatency))
+			elem.FieldByName("RouteRandomly").Set(reflect.ValueOf(redisCfg.Cluster.RouteRandomly))
 		}
 
 		elem.FieldByName("Username").Set(reflect.ValueOf(redisCfg.Username))

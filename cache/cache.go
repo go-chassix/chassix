@@ -63,6 +63,16 @@ func (rc *RedisCacheStore) Get(key string) (val interface{}, ok bool) {
 
 //Set add or update key value
 func (rc *RedisCacheStore) Set(key string, val interface{}) (ok bool) {
+	t := reflect.TypeOf(val)
+	if t.Kind() == reflect.Ptr {
+		t = t.Elem()
+	}
+	if t != rc.valType {
+		ok = false
+		rc.log.Infof("value type wrong. should be %s or %s pointer, actual: %+v", rc.valType, rc.valType, t)
+		return
+	}
+
 	ctx := context.Background()
 	var buffer bytes.Buffer
 	enc := gob.NewEncoder(&buffer)
@@ -93,10 +103,11 @@ func (rc *RedisCacheStore) Delete(key string) {
 //Contains check key existed in redis cache store
 func (rc *RedisCacheStore) Contains(key string) bool {
 	var result int64
+	key = fmt.Sprintf("%s:%s", rc.prefix, key)
 	if rc.redisCfg.Mode == "simple" || rc.redisCfg.Mode == "sentinel" {
-		result = chassis.RedisClient().Exists(context.Background(), fmt.Sprintf("%s:%s", rc.prefix, key)).Val()
+		result = chassis.RedisClient().Exists(context.Background(), key).Val()
 	} else if rc.redisCfg.Mode == "cluster" {
-		result = chassis.RedisClusterClient().Exists(context.Background(), fmt.Sprintf("%s:%s", rc.prefix, key)).Val()
+		result = chassis.RedisClusterClient().Exists(context.Background(), key).Val()
 	}
 	return result == 1
 }
@@ -108,10 +119,10 @@ func NewRedisCacheStore(name string, valType interface{}, expired time.Duration)
 	if t.Kind() == reflect.Ptr {
 		t = t.Elem()
 	}
-	//todo check if key existed return error
 	store := &RedisCacheStore{prefix: name, valType: t, expiredTime: expired}
 	store.log = logx.New().Category("cache").Component(name)
-	cfg := config.Redis()
-	store.redisCfg = &cfg
+	redisCfg := config.Redis()
+	store.redisCfg = &redisCfg
+
 	return store
 }

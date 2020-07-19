@@ -196,6 +196,21 @@ type RedisCommonConfig struct {
 
 //RedisClusterConfig 集群模式配置
 type RedisClusterConfig struct {
+	Addrs []string
+
+	// The maximum number of retries before giving up. Command is retried
+	// on network errors and MOVED/ASK redirects.
+	// Default is 8 retries.
+	MaxRedirects int
+
+	// Enables read-only commands on slave nodes.
+	ReadOnly bool
+	// Allows routing read-only commands to the closest master or slave node.
+	// It automatically enables ReadOnly.
+	RouteByLatency bool
+	// Allows routing read-only commands to the random master or slave node.
+	// It automatically enables ReadOnly.
+	RouteRandomly bool
 }
 
 // IsApolloEnable is apollo enable
