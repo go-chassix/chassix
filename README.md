@@ -7,6 +7,12 @@ Integrate awesome go framework for developing web service
 
 go webservice chassis
 
+usage:
+```
+go get c6x.io/chassis
+```
+
+
 Features:
 
 - [x] gorm
@@ -18,7 +24,3 @@ Features:
 - [x] Redis cache
 - [x] Memory cache
 
-usage:
-```
-go get c6x.io/chassis
-```
