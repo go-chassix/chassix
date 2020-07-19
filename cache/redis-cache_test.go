@@ -21,7 +21,7 @@ type testT2 struct {
 func TestRedisCacheStore_Set(t *testing.T) {
 	config.LoadFromEnvFile()
 	var number int
-	cache1 := NewRedisCacheStore("test", number, 0)
+	cache1, err := NewRedisCacheStore("test", number, 0)
 	ok := cache1.Set("ab", 3)
 	assert.True(t, ok)
 	ok = cache1.Set("ab", "3")
@@ -33,7 +33,8 @@ func TestRedisCacheStore_Set(t *testing.T) {
 	assert.True(t, ok)
 	assert.Equal(t, 3, val)
 
-	cache11 := NewRedisCacheStore("test", number, 0)
+	cache11, err := NewRedisCacheStore("test", number, 0)
+	assert.NoError(t, err)
 	assert.NotNil(t, cache11)
 	tt := &testT{
 		A: "test",
@@ -45,7 +46,8 @@ func TestRedisCacheStore_Set(t *testing.T) {
 		A: "t",
 		B: 2,
 	}
-	cache2 := NewRedisCacheStore("test2", testT{}, 5*time.Minute)
+	cache2, err := NewRedisCacheStore("test2", testT{}, 5*time.Minute)
+	assert.NoError(t, err)
 	assert.True(t, ok)
 	ok2 := cache2.Set("abc", tt)
 	assert.True(t, ok2)
