@@ -67,7 +67,8 @@ type DatabaseConfig struct {
 
 //OpenAPIConfig open api config
 type OpenAPIConfig struct {
-	Spec struct {
+	Enabled bool `yaml:"enabled"`
+	Spec    struct {
 		Title       string
 		Description string `yaml:"desc"`
 		Contact     struct {

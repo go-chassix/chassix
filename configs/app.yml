@@ -9,12 +9,6 @@ logging:
   report-caller: true
   no-colors: true
   caller-first: true
-#database:
-#  dsn: root:@tcp(database:3306)/test?parseTime=true
-#  maxIndle: 10
-#  maxOpen: 50
-#  maxLifetime: 50  #单位秒 If d <= 0, connections are reused forever.
-#  showSQL: true
 databases:
   - dsn: root:@tcp(database:3306)/test?parseTime=true
     dialect: 'mysql'
@@ -123,6 +117,7 @@ redis:
   # if IdleTimeout is set.
   idle-check-frequency: 1m
 openapi:
+  enabled: true
   spec:
     title: Your service name
     desc: api docs
@@ -141,7 +136,7 @@ openapi:
       desc: "Order resource"
   ui:
     api: /apidocs.json
-    dist: /Users/liwei/MyWorkspace/swagger-ui/dist/
+    dist: ./swagger-ui/dist/
     entrypoint: /apidocs/
 mail:
   - imap-addr: imap.example.com:993

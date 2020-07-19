@@ -65,20 +65,23 @@ func Serve(svc []*restful.WebService) {
 	restful.Filter(restFilters.RequestID)
 	restful.Filter(restFilters.MeasureTime)
 
-	ucfg := config.Openapi().UI
-	//定义swagger文档
-	cfg := restfulSpec.Config{
-		WebServices:                   svc, // you control what services are visible
-		APIPath:                       ucfg.API,
-		PostBuildSwaggerObjectHandler: newPostBuildOpenAPIObjectFunc()}
-	restful.DefaultContainer.Add(restfulSpec.NewOpenAPIService(cfg))
-	http.Handle(ucfg.Entrypoint, http.StripPrefix(ucfg.Entrypoint, http.FileServer(http.Dir(ucfg.Dist))))
+	//if enable openapi setting. register swagger ui and apidocs json API.
+	if config.Openapi().Enabled {
+		swaggerUICfg := config.Openapi().UI
+		//定义swagger文档
+		cfg := restfulSpec.Config{
+			WebServices:                   svc, // you control what services are visible
+			APIPath:                       swaggerUICfg.API,
+			PostBuildSwaggerObjectHandler: newPostBuildOpenAPIObjectFunc()}
+		restful.DefaultContainer.Add(restfulSpec.NewOpenAPIService(cfg))
+		http.Handle(swaggerUICfg.Entrypoint, http.StripPrefix(swaggerUICfg.Entrypoint, http.FileServer(http.Dir(swaggerUICfg.Dist))))
+	}
 	//启动服务
 	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(config.Server().Port), nil))
 }
 
-//PageQueryParamters get page params from request
-func PageQueryParamters(req *restful.Request) (pageIndex, pageSize uint) {
+//PageQueryParams get page params from request
+func PageQueryParams(req *restful.Request) (pageIndex, pageSize uint) {
 	// var err error
 	if pi, err := strconv.Atoi(req.QueryParameter(PageIndexKey)); err == nil {
 		pageIndex = uint(pi)
@@ -129,9 +132,8 @@ func AddMetaDataTagsAndWriteSample(ws *restful.WebService, tags []string, entity
 	AddWriteSample(ws, entityType)
 }
 
-//NewWriteSample new writesample
+//NewWriteSample new write sample
 func NewWriteSample(entity interface{}) ResponseEntitySample {
-
 	return ResponseEntitySample{
 		Data: entity,
 	}
