@@ -1,6 +1,8 @@
 # chassis-go 
 [![Build Status](https://cloud.drone.io/api/badges/chassisx/chassis-go/status.svg)](https://cloud.drone.io/chassisx/chassis-go)
+
 [中文](https://github.com/chassisx/chassis-go/blob/master/docs/README-zh_CN.md)
+
 Integrate awesome go framework for developing web service
 
 go webservice chassis
