@@ -56,12 +56,9 @@ func (rc *RedisCacheStore) Get(key string) (val interface{}, ok bool) {
 //Set add or update key value
 func (rc *RedisCacheStore) Set(key string, val interface{}) (ok bool) {
 	t := reflect.TypeOf(val)
-	if t.Kind() == reflect.Ptr {
-		t = t.Elem()
-	}
 	if t != rc.valType {
 		ok = false
-		rc.log.Infof("value type wrong. should be %s or %s pointer, actual: %+v", rc.valType, rc.valType, t)
+		rc.log.Infof("value type wrong. should be %s actual: %+v", rc.valType, t)
 		return
 	}
 
@@ -111,10 +108,6 @@ func NewRedisCacheStore(name string, valType interface{}, expired time.Duration)
 		return
 	}
 	t := reflect.TypeOf(valType)
-	if t.Kind() == reflect.Ptr {
-		t = t.Elem()
-	}
-	gob.Register(t)
 
 	redisStore := &RedisCacheStore{prefix: name, valType: t, expiredTime: expired}
 	redisStore.log = logx.New().Category("cache").Component(name)
