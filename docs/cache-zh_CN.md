@@ -1,5 +1,5 @@
 # 缓存
-ChassisX 支持memory、redis两种开箱即用的缓存。
+chassis-go 支持memory、redis两种开箱即用的缓存。
 
 cache接口定义如下：
 ```go
