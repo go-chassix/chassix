@@ -2,7 +2,7 @@ package chassis
 
 import "github.com/jinzhu/copier"
 
-//Copy copy anyting. just proxy to copier(jinzhu/copier).
-func Copy(toValue interface{}, fromValu interface{}) {
-	copier.Copy(toValue, fromValu)
+//Copy copy anything. just proxy to copier(jinzhu/copier).
+func Copy(target interface{}, from interface{}) {
+	copier.Copy(target, from)
 }

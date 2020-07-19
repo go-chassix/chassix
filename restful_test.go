@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	restful "github.com/emicklei/go-restful/v3"
+	"github.com/emicklei/go-restful/v3"
 	"github.com/stretchr/testify/assert"
 )
 

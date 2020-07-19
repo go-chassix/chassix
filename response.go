@@ -1,8 +1,9 @@
 package chassis
 
 import (
-	"c6x.io/chassis/apierrors"
 	"github.com/emicklei/go-restful/v3"
+
+	"c6x.io/chassis/apierrors"
 )
 
 //Entity response entity

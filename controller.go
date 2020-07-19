@@ -10,7 +10,7 @@ import (
 type BaseController struct {
 }
 
-//BaseResource RESTful webservice name ,alias BaseController.
+//BaseResource RESTFul webservice name ,alias BaseController.
 type BaseResource struct {
 	BaseController
 }

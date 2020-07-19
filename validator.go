@@ -5,12 +5,13 @@ import (
 	"fmt"
 	"sync"
 
-	"c6x.io/chassis/apierrors"
 	"github.com/emicklei/go-restful/v3"
 	"github.com/go-playground/locales/zh"
 	ut "github.com/go-playground/universal-translator"
 	"github.com/go-playground/validator/v10"
-	zh_translations "github.com/go-playground/validator/v10/translations/zh"
+	zhTranslation "github.com/go-playground/validator/v10/translations/zh"
+
+	"c6x.io/chassis/apierrors"
 )
 
 var (
@@ -35,7 +36,7 @@ func Validate() *validator.Validate {
 			//todo check
 		}
 
-		zh_translations.RegisterDefaultTranslations(validate, trans)
+		zhTranslation.RegisterDefaultTranslations(validate, trans)
 	})
 	return validate
 }

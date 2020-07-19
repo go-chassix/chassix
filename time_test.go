@@ -21,6 +21,6 @@ func Test_JSONDate(t *testing.T) {
 	`
 	var u User
 	json.Unmarshal([]byte(date), &u)
-	t2 := time.Time(u.Date).Local().Format(dateFormart)
+	t2 := time.Time(u.Date).Local().Format(dateFormat)
 	assert.Equal(t, "2020-10-10", t2)
 }

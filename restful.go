@@ -4,13 +4,13 @@ import (
 	"net/http"
 	"strconv"
 
-	restfulspec "github.com/emicklei/go-restful-openapi/v2"
+	restfulSpec "github.com/emicklei/go-restful-openapi/v2"
 	"github.com/emicklei/go-restful/v3"
 	"github.com/go-openapi/spec"
 
 	"c6x.io/chassis/config"
-	restfilters "c6x.io/chassis/filters/rest"
-	xLog "c6x.io/chassis/logx"
+	restFilters "c6x.io/chassis/filters/rest"
+	"c6x.io/chassis/logx"
 )
 
 const (
@@ -25,10 +25,10 @@ const (
 )
 
 // KeyOpenAPITags is a Metadata key for a restful Route
-const KeyOpenAPITags = restfulspec.KeyOpenAPITags
+const KeyOpenAPITags = restfulSpec.KeyOpenAPITags
 
 //newPostBuildOpenAPIObjectFunc open api api docs data
-func newPostBuildOpenAPIObjectFunc() restfulspec.PostBuildSwaggerObjectFunc {
+func newPostBuildOpenAPIObjectFunc() restfulSpec.PostBuildSwaggerObjectFunc {
 	return func(swo *spec.Swagger) {
 		swo.Info = &spec.Info{
 			InfoProps: spec.InfoProps{
@@ -60,18 +60,18 @@ func newPostBuildOpenAPIObjectFunc() restfulspec.PostBuildSwaggerObjectFunc {
 
 //Serve rest webservice
 func Serve(svc []*restful.WebService) {
-	log := xLog.New().Service("chassis").Category("restful")
+	log := logx.New().Service("chassis").Category("restful")
 
-	restful.Filter(restfilters.RequestID)
-	restful.Filter(restfilters.MeasureTime)
+	restful.Filter(restFilters.RequestID)
+	restful.Filter(restFilters.MeasureTime)
 
 	ucfg := config.Openapi().UI
 	//定义swagger文档
-	cfg := restfulspec.Config{
+	cfg := restfulSpec.Config{
 		WebServices:                   svc, // you control what services are visible
 		APIPath:                       ucfg.API,
 		PostBuildSwaggerObjectHandler: newPostBuildOpenAPIObjectFunc()}
-	restful.DefaultContainer.Add(restfulspec.NewOpenAPIService(cfg))
+	restful.DefaultContainer.Add(restfulSpec.NewOpenAPIService(cfg))
 	http.Handle(ucfg.Entrypoint, http.StripPrefix(ucfg.Entrypoint, http.FileServer(http.Dir(ucfg.Dist))))
 	//启动服务
 	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(config.Server().Port), nil))

@@ -1,11 +1,13 @@
 package cache
 
 import (
-	"c6x.io/chassis/logx"
 	"errors"
 	"fmt"
-	lru "github.com/hashicorp/golang-lru"
 	"reflect"
+
+	lru "github.com/hashicorp/golang-lru"
+
+	"c6x.io/chassis/logx"
 )
 
 //MemoryCache implements cache store based or lru cache

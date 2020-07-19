@@ -8,7 +8,7 @@ import (
 	"github.com/jinzhu/gorm"
 
 	"c6x.io/chassis/config"
-	xLog "c6x.io/chassis/logx"
+	"c6x.io/chassis/logx"
 )
 
 type MultiDBSource struct {
@@ -38,7 +38,7 @@ func initMultiDBSource() {
 }
 
 func mustConnectDB(dbCfg *config.DatabaseConfig) *gorm.DB {
-	log := xLog.New().Service("chassis").Category("gorm")
+	log := logx.New().Service("chassis").Category("gorm")
 	dialect := dbCfg.Dialect
 	if "" == dialect {
 		dialect = "mysql"
