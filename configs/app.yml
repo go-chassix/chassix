@@ -129,6 +129,11 @@ openapi:
       name: test
       url: test
     version: 1.0
+  host: localhost
+  basePath: /
+  schemas:
+    - http
+    - https
   tags:
     - name: Users
       desc: "User resource"
