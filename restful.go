@@ -30,6 +30,9 @@ const KeyOpenAPITags = restfulSpec.KeyOpenAPITags
 //newPostBuildOpenAPIObjectFunc open api api docs data
 func newPostBuildOpenAPIObjectFunc() restfulSpec.PostBuildSwaggerObjectFunc {
 	return func(swo *spec.Swagger) {
+		swo.Host = config.Openapi().Host
+		swo.BasePath = config.Openapi().BasePath
+		swo.Schemes = config.Openapi().Schemas
 		swo.Info = &spec.Info{
 			InfoProps: spec.InfoProps{
 				Title:       config.Openapi().Spec.Title,
