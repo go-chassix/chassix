@@ -1,6 +1,6 @@
-package chassis
+package chassix
 
-import "c6x.io/chassis/config"
+import "c6x.io/chassix.v2/config"
 
 const (
 	//EnvPgTestDataFile import test data sql file

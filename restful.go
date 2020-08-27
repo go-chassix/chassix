@@ -1,4 +1,4 @@
-package chassis
+package chassix
 
 import (
 	"net/http"
@@ -8,9 +8,9 @@ import (
 	"github.com/emicklei/go-restful/v3"
 	"github.com/go-openapi/spec"
 
-	"c6x.io/chassis/config"
-	restFilters "c6x.io/chassis/filters/rest"
-	"c6x.io/chassis/logx"
+	"c6x.io/chassix.v2/config"
+	restFilters "c6x.io/chassix.v2/filters/rest"
+	"c6x.io/chassix.v2/logx"
 )
 
 const (
@@ -60,7 +60,7 @@ func newPostBuildOpenAPIObjectFunc() restfulSpec.PostBuildSwaggerObjectFunc {
 
 //Serve rest webservice
 func Serve(svc []*restful.WebService) {
-	log := logx.New().Service("chassis").Category("restful")
+	log := logx.New().Service("chassix").Category("restful")
 
 	restful.Filter(restFilters.RequestID)
 	restful.Filter(restFilters.MeasureTime)

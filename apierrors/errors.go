@@ -7,8 +7,8 @@ type APIError struct {
 	Desc string `json:"err_desc,omitempty"`
 }
 
-//DefaulAPIError default error for success.
-var DefaulAPIError = New(0, "Ok", "success")
+//DefaultAPIError default error for success.
+var DefaultAPIError = New(0, "Ok", "success")
 
 //New new api error
 func New(code int, msg, desc string) *APIError {

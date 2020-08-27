@@ -1,4 +1,4 @@
-package chassis
+package chassix
 
 import (
 	"testing"
@@ -7,7 +7,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"github.com/stretchr/testify/assert"
 
-	"c6x.io/chassis/config"
+	"c6x.io/chassix.v2/config"
 )
 
 func TestDBs(t *testing.T) {

@@ -1,4 +1,4 @@
-package chassis
+package chassix
 
 /**
 * Common errors. code prefix 100xxx

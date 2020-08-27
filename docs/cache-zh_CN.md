@@ -22,7 +22,7 @@ package main
 import (
     "fmt"
     
-    "c6x.io/chassis/cache"
+    "c6x.io/chassix/cache"
 )
 func main(){
     var numberType int
@@ -47,7 +47,7 @@ package main
 import (
     "fmt"
 
-    "c6x.io/chassis/cache"
+    "c6x.io/chassix/cache"
 )
 type testT struct {
 	A string

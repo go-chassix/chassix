@@ -8,10 +8,9 @@ import (
 	"reflect"
 	"time"
 
-	"c6x.io/chassis/config"
-	"c6x.io/chassis/logx"
-
-	"c6x.io/chassis"
+	"c6x.io/chassix.v2"
+	"c6x.io/chassix.v2/config"
+	"c6x.io/chassix.v2/logx"
 )
 
 //RedisCacheStore based redis implement cache store
@@ -32,10 +31,10 @@ func (rc *RedisCacheStore) Get(key string) (val interface{}, ok bool) {
 	var data []byte
 	var err error
 	if redisCfg.Mode == "simple" || redisCfg.Mode == "sentinel" {
-		data, err = chassis.RedisClient().Get(ctx, fmt.Sprintf("%s:%s", rc.prefix, key)).Bytes()
+		data, err = chassix.RedisClient().Get(ctx, fmt.Sprintf("%s:%s", rc.prefix, key)).Bytes()
 	}
 	if redisCfg.Mode == "cluster" {
-		data, err = chassis.RedisClusterClient().Get(ctx, fmt.Sprintf("%s:%s", rc.prefix, key)).Bytes()
+		data, err = chassix.RedisClusterClient().Get(ctx, fmt.Sprintf("%s:%s", rc.prefix, key)).Bytes()
 	}
 
 	if err != nil {
@@ -68,9 +67,9 @@ func (rc *RedisCacheStore) Set(key string, val interface{}) (ok bool) {
 	enc.Encode(val)
 	var err error
 	if rc.redisCfg.Mode == "simple" || rc.redisCfg.Mode == "sentinel" {
-		err = chassis.RedisClient().Set(ctx, fmt.Sprintf("%s:%s", rc.prefix, key), buffer.Bytes(), rc.expiredTime).Err()
+		err = chassix.RedisClient().Set(ctx, fmt.Sprintf("%s:%s", rc.prefix, key), buffer.Bytes(), rc.expiredTime).Err()
 	} else if rc.redisCfg.Mode == "cluster" {
-		err = chassis.RedisClusterClient().Set(ctx, fmt.Sprintf("%s:%s", rc.prefix, key), buffer.Bytes(), rc.expiredTime).Err()
+		err = chassix.RedisClusterClient().Set(ctx, fmt.Sprintf("%s:%s", rc.prefix, key), buffer.Bytes(), rc.expiredTime).Err()
 	}
 	if err != nil {
 		rc.log.Errorf("set key [%s] failed, error: %s", key, err)
@@ -83,9 +82,9 @@ func (rc *RedisCacheStore) Set(key string, val interface{}) (ok bool) {
 //Delete delete key value in redis cache store
 func (rc *RedisCacheStore) Delete(key string) {
 	if rc.redisCfg.Mode == "simple" || rc.redisCfg.Mode == "sentinel" {
-		chassis.RedisClient().Del(context.Background(), fmt.Sprintf("%s:%s", rc.prefix, key))
+		chassix.RedisClient().Del(context.Background(), fmt.Sprintf("%s:%s", rc.prefix, key))
 	} else if rc.redisCfg.Mode == "cluster" {
-		chassis.RedisClusterClient().Del(context.Background(), fmt.Sprintf("%s:%s", rc.prefix, key))
+		chassix.RedisClusterClient().Del(context.Background(), fmt.Sprintf("%s:%s", rc.prefix, key))
 	}
 }
 
@@ -94,9 +93,9 @@ func (rc *RedisCacheStore) Contains(key string) bool {
 	var result int64
 	key = fmt.Sprintf("%s:%s", rc.prefix, key)
 	if rc.redisCfg.Mode == "simple" || rc.redisCfg.Mode == "sentinel" {
-		result = chassis.RedisClient().Exists(context.Background(), key).Val()
+		result = chassix.RedisClient().Exists(context.Background(), key).Val()
 	} else if rc.redisCfg.Mode == "cluster" {
-		result = chassis.RedisClusterClient().Exists(context.Background(), key).Val()
+		result = chassix.RedisClusterClient().Exists(context.Background(), key).Val()
 	}
 	return result == 1
 }

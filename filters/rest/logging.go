@@ -6,11 +6,11 @@ import (
 	"github.com/emicklei/go-restful/v3"
 	uuid "github.com/satori/go.uuid"
 
-	logger "c6x.io/chassis/logx"
+	logger "c6x.io/chassix.v2/logx"
 )
 
 //var log *xLog.Entry
-var log = logger.New().Component("chassis").Category("filter")
+var log = logger.New().Component("chassix").Category("filter")
 
 //RequestID Filter
 func RequestID(req *restful.Request, resp *restful.Response, chain *restful.FilterChain) {

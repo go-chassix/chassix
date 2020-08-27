@@ -1,4 +1,4 @@
-package chassis
+package chassix
 
 import (
 	"errors"
@@ -11,7 +11,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	zhTranslation "github.com/go-playground/validator/v10/translations/zh"
 
-	"c6x.io/chassis/apierrors"
+	"c6x.io/chassix.v2/apierrors"
 )
 
 var (

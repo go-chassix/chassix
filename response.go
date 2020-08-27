@@ -1,9 +1,9 @@
-package chassis
+package chassix
 
 import (
 	"github.com/emicklei/go-restful/v3"
 
-	"c6x.io/chassis/apierrors"
+	"c6x.io/chassix.v2/apierrors"
 )
 
 //Entity response entity
@@ -36,7 +36,7 @@ func NewResponse(res *restful.Response) *Response {
 func (re *Response) Ok(entity interface{}) {
 	re.body.Data = entity
 	re.httpStatus = 200
-	re.body.APIError = apierrors.DefaulAPIError
+	re.body.APIError = apierrors.DefaultAPIError
 	re.writeHeaderAndEntity()
 }
 
@@ -44,7 +44,7 @@ func (re *Response) Ok(entity interface{}) {
 func (re *Response) Created(entity interface{}) {
 	re.body.Data = entity
 	re.httpStatus = 201
-	re.body.APIError = apierrors.DefaulAPIError
+	re.body.APIError = apierrors.DefaultAPIError
 	re.writeHeaderAndEntity()
 }
 

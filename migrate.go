@@ -1,4 +1,4 @@
-package chassis
+package chassix
 
 import (
 	"errors"
@@ -9,12 +9,12 @@ import (
 	_ "github.com/golang-migrate/migrate/v4/database/mysql" //import mysql driver
 	"github.com/golang-migrate/migrate/v4/source/go_bindata"
 
-	"c6x.io/chassis/logx"
+	"c6x.io/chassix.v2/logx"
 )
 
 //Migrate Run new bindataInstance and UP
 func Migrate(assetNames []string, afn bindata.AssetFunc, dbURL, dialect string) error {
-	log := logx.New().Service("chassis").Category("migrate")
+	log := logx.New().Service("chassix").Category("migrate")
 	// wrap assets in Resource
 	s := bindata.Resource(assetNames, afn)
 
@@ -79,7 +79,7 @@ func Migrate(assetNames []string, afn bindata.AssetFunc, dbURL, dialect string) 
 
 //ExecSQLFile danger!!! just for importing test data.
 func ExecSQLFile(fileName string) error {
-	log := logx.New().Service("chassis").Category("execsql")
+	log := logx.New().Service("chassix").Category("execsql")
 	if fileName != "" {
 		if file, err := os.Open(fileName); err == nil {
 			// count := 0

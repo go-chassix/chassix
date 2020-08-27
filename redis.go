@@ -1,11 +1,11 @@
-package chassis
+package chassix
 
 import (
 	"reflect"
 	"sync"
 	"time"
 
-	"c6x.io/chassis/config"
+	"c6x.io/chassix.v2/config"
 	"github.com/go-redis/redis/v8"
 )
 

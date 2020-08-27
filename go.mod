@@ -1,4 +1,4 @@
-module c6x.io/chassis
+module c6x.io/chassix.v2
 
 go 1.13
 

@@ -1,9 +1,10 @@
 package cache
 
 import (
-	"c6x.io/chassis/config"
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"c6x.io/chassix.v2/config"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestMemoryCacheStore_Set(t *testing.T) {

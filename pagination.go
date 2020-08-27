@@ -1,4 +1,4 @@
-package chassis
+package chassix
 
 const (
 	//SortDirectionDESC 降序
