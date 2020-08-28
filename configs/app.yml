@@ -149,11 +149,3 @@ mail:
     tls: true
     username: your-mail
     password: your-mail-pwd
-apollo:
-  enable: false
-  conf:
-    appId: 51ac3835-b78b-4217-bbbb-ba34470e4363
-    cluster: default
-    namespaces:
-      - application
-    ip: 10.3.30.15:8080

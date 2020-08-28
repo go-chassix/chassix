@@ -1,11 +1,9 @@
 package config
 
 import (
-	"encoding/json"
 	"fmt"
 	"os"
 
-	"gopkg.in/apollo.v0"
 	"gopkg.in/yaml.v3"
 )
 
@@ -15,22 +13,6 @@ func LoadFromEnvFile() {
 	if err := LoadFromFile(fileName); err != nil {
 		fmt.Printf("load file config error: %s\n", err)
 		os.Exit(1)
-	}
-	if IsApolloEnable() {
-		if err := apollo.StartWithConf(&config.Apollo.Conf); err != nil {
-			fmt.Printf("load apollo config error: %s\n", err)
-			os.Exit(1)
-			return
-		}
-
-		go func() {
-			for {
-				event := apollo.WatchUpdate()
-				changeEvent := <-event
-				bytes, _ := json.Marshal(changeEvent)
-				fmt.Println("event:", string(bytes))
-			}
-		}()
 	}
 }
 

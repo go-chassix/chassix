@@ -1,0 +1,10 @@
+apollo:
+  enable: true
+  settings:
+    appId: 6ca76507-6be3-4a9e-b2fb-b437c8817166
+    cluster: default
+    namespaces:
+      - app.yml
+      - redis.yml
+      - custom.yml
+    ip: 10.3.30.15:8080

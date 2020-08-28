@@ -224,8 +224,8 @@ func IsApolloEnable() bool {
 
 // ApolloConfig apollo config
 type ApolloConfig struct {
-	Enable bool        `yaml:"enable"`
-	Conf   apollo.Conf `yaml:"conf"`
+	Enable   bool        `yaml:"enable"`
+	Settings apollo.Conf `yaml:"settings"`
 }
 
 //App app config
