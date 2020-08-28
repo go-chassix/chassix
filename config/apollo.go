@@ -10,6 +10,7 @@ import (
 	"strings"
 )
 
+// LoadFromApollo load config from apollo
 func LoadFromApollo() {
 	LoadFromEnvFile()
 	if IsApolloEnable() {
@@ -34,7 +35,7 @@ func LoadFromApollo() {
 				changeEvent := <-event
 				bytes, _ := json.Marshal(changeEvent)
 				fmt.Println("event:", string(bytes))
-				for _, namespace := range (config).Apollo.Settings.Namespaces {
+				for _, namespace := range config.Apollo.Settings.Namespaces {
 					ymlTxt := apollo.GetNameSpaceContent(namespace, "")
 					if err := yaml.NewDecoder(strings.NewReader(ymlTxt)).Decode(config); err != nil {
 						fmt.Printf("load apollo config error: %s\n", err)
@@ -53,10 +54,9 @@ func LoadFromApollo() {
 var requireLoadCustomConfig bool
 var customConfig interface{}
 
-//LoadCustomFromFile Load custom config from apollo, save to custom config
+// LoadCustomFromApollo Load custom config from apollo, save to custom config
 func LoadCustomFromApollo(customCfg interface{}) error {
 	if !IsApolloEnable() {
-
 		return errors.New("apollo is not enabled")
 	}
 	requireLoadCustomConfig = true

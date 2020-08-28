@@ -67,11 +67,11 @@ type DatabaseConfig struct {
 
 //OpenAPIConfig open api config
 type OpenAPIConfig struct {
-	Enabled bool `yaml:"enabled"`
-	Host string  `yaml:"host"`
-	BasePath string `yaml:"basePath"`
-	Schemas   []string	`yaml:"schemas"`
-	Spec    struct {
+	Enabled  bool     `yaml:"enabled"`
+	Host     string   `yaml:"host"`
+	BasePath string   `yaml:"basePath"`
+	Schemas  []string `yaml:"schemas"`
+	Spec     struct {
 		Title       string
 		Description string `yaml:"desc"`
 		Contact     struct {
