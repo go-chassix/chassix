@@ -1,0 +1,79 @@
+openapi:
+  enabled: true
+  spec:
+    title: Your service name
+    desc: api docs
+    contact:
+      name: your-name
+      email: your-mail
+      url: https:#exmaple.org
+    license:
+      name: test
+      url: test
+    version: 1.0
+  tags:
+    - name: Users
+      desc: "User resource"
+    - name: Orders
+      desc: "Order resource"
+  ui:
+    api: /apidocs.json
+    dist: swagger-ui/dist/
+    entrypoint: /apidocs/
+  global-api:
+    root: /
+  apis:
+    strings:
+      tags:
+        - strings
+      routes:
+        /strings:
+          name: strings
+          params:
+            - type: query   #query/json
+              name: uid
+              description: uids
+              required: yes
+              data-type: number
+              default-value: 1111
+          tags:
+            - a
+            - b
+          returns:
+            - code: 201
+              msg: success
+              model: stringArray
+    users:
+      tags:
+        - users
+      routes:
+        /users:
+          name: hello world
+          params:
+            - type: query   #query/json
+              name: uid
+              description: uids
+              required: yes
+              data-type: number
+              default-value: 1111
+          tags:
+            - a
+            - b
+          returns:
+            - code: 201
+              msg: success
+              model: userDTOPageRes
+        /users/{id}:
+          name: user api
+          params:
+            - type: path   #query/json
+              name: id
+              description: id
+          tags:
+            - a
+            - b
+#            - users
+          returns:
+            - code: 201
+              msg: success
+              model: userDTO

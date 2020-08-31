@@ -1,7 +1,8 @@
 package chassix
 
 import (
-	"github.com/emicklei/go-restful/v3"
+	"c6x.io/chassix.v2/restful"
+	emkRestful "github.com/emicklei/go-restful/v3"
 
 	"c6x.io/chassix.v2/apierrors"
 )
@@ -24,12 +25,15 @@ type ResponseEntitySample struct {
 type Response struct {
 	body       Entity
 	httpStatus int
-	res        *restful.Response
+	res        *emkRestful.Response
 }
 
 //NewResponse new return
-func NewResponse(res *restful.Response) *Response {
+func NewResponse(res *emkRestful.Response) *Response {
 	return &Response{res: res}
+}
+func RestResponse(ctx *restful.Context) *Response {
+	return &Response{res: ctx.Response}
 }
 
 //Ok 200 return

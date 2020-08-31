@@ -11,11 +11,7 @@ import (
 
 //LoadEnvFile Load config from the file that path is saved in os env.
 func LoadFromEnvFile() {
-	fileName := os.Getenv(configFileEnvKey)
-	if err := LoadFromFile(fileName); err != nil {
-		fmt.Printf("load file config error: %s\n", err)
-		os.Exit(1)
-	}
+	loadConfigsFromYamlFile()
 	if IsApolloEnable() {
 		if err := apollo.StartWithConf(&config.Apollo.Conf); err != nil {
 			fmt.Printf("load apollo config error: %s\n", err)
@@ -60,4 +56,19 @@ func LoadCustomFromFile(fileName string, customCfg interface{}) error {
 		return err
 	}
 	return nil
+}
+
+func loadConfigsFromYamlFile() {
+	appCfgFileName := os.Getenv(appConfigFileEnvKey)
+	if err := LoadFromFile(appCfgFileName); err != nil {
+		fmt.Printf("load file config error: %s\n", err)
+		os.Exit(1)
+	}
+
+	apiCfgFileName := os.Getenv(apiConfigFileEnvKey)
+	if err := LoadFromFile(apiCfgFileName); err != nil {
+		fmt.Printf("load file config error: %s\n", err)
+		os.Exit(1)
+	}
+
 }

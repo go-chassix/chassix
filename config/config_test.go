@@ -37,7 +37,7 @@ func TestConfig(t *testing.T) {
 }
 
 func TestLoadFromEnvFile(t *testing.T) {
-	fileName := os.Getenv(configFileEnvKey)
+	fileName := os.Getenv(appConfigFileEnvKey)
 	if err := LoadFromFile(fileName); err != nil {
 		fmt.Printf("load file config error: %s\n", err)
 		assert.NoError(t, err)

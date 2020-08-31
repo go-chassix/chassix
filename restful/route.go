@@ -16,25 +16,6 @@ type Route struct {
 	*emkRestful.Route
 }
 
-type RouteBuilder struct {
-	*emkRestful.RouteBuilder
-}
-
-// If this route is matched with the incoming Http Request then call this function with the *Request,*Response pair. Required.
-func (b *RouteBuilder) To(function RouteFunction) *RouteBuilder {
-	b.RouteBuilder.To(convert(function))
-	return b
-}
-func convert(function RouteFunction) func(request *emkRestful.Request, response *emkRestful.Response) {
-	return func(request *emkRestful.Request, response *emkRestful.Response) {
-		ctx := &Context{
-			Request:  request,
-			Response: response,
-		}
-		function(ctx)
-	}
-}
-
 //func ()
 //// RouteBuilder is a helper to construct Routes.
 //type RouteBuilder struct {

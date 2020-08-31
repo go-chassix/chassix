@@ -16,3 +16,4 @@
 
 .idea
 *.local.yml
+!/config/.apollo
