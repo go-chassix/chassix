@@ -71,4 +71,6 @@ func loadConfigsFromYamlFile() {
 		os.Exit(1)
 	}
 
+	fmt.Printf("%+v", config)
+
 }

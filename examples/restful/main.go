@@ -1,11 +1,12 @@
 package main
 
 import (
+	"fmt"
+
 	"c6x.io/chassix.v2"
 	"c6x.io/chassix.v2/apierrors"
 	"c6x.io/chassix.v2/config"
 	"c6x.io/chassix.v2/restful"
-	"fmt"
 )
 
 func main() {
@@ -26,16 +27,21 @@ func main() {
 	ws2.Consumes(restful.MediaTypeApplicationJson)
 	ws2.Route(ws2.GET("").To(strings))
 
-	restful.RegisterModel(UserDTO{})
-	restful.RegisterModel(&UserDTO{})
-	restful.RegisterModelName("userDTOPageRes", UserPageRes{})
-	restful.RegisterModel(stringArray{"1"})
+	restful.RegisterModels(registerModels)
+
 	ws.AddDocs()
 	ws2.AddDocs()
 
 	restful.Add(ws)
 	restful.Add(ws2)
 	chassix.ServeRestful()
+}
+
+func registerModels() {
+	restful.RegisterModel(UserDTO{})
+	restful.RegisterModel(&UserDTO{})
+	restful.RegisterModelName("userDTOPageRes", UserPageRes{})
+	restful.RegisterModel(stringArray{})
 }
 
 func strings(ctx *restful.Context) {

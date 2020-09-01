@@ -22,12 +22,14 @@ var registeredModels = make(map[string]interface{})
 func RegisterModel(m Model) {
 	RegisterModelName(m.ModelName(), m)
 }
+func RegisterModels(registerModelFun func()) {
+	registerModelFun()
+}
 func RegisterModelName(name string, m interface{}) {
 	v := reflect.ValueOf(m)
 	t := v.Type()
 	if v.Kind() == reflect.Ptr {
 		t = v.Elem().Type()
-		//return
 	}
 
 	if v := reflect.Zero(t); v.CanInterface() {

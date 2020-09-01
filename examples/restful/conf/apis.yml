@@ -22,13 +22,13 @@ openapi:
     entrypoint: /apidocs/
   global-api:
     root: /
-  apis:
-    strings:
+  resources:
+    - name: orders
       tags:
-        - strings
+        - Orders
       routes:
-        /strings:
-          name: strings
+        - path: /orders
+          method: GET
           params:
             - type: query   #query/json
               name: uid
@@ -43,12 +43,12 @@ openapi:
             - code: 201
               msg: success
               model: stringArray
-    users:
+    - name: users
       tags:
         - users
       routes:
-        /users:
-          name: hello world
+        - path: /Users
+          name: user resource
           params:
             - type: query   #query/json
               name: uid
@@ -63,8 +63,8 @@ openapi:
             - code: 201
               msg: success
               model: userDTOPageRes
-        /users/{id}:
-          name: user api
+        - path: /users/{id}
+          name: 根据ID获取用户信息
           params:
             - type: path   #query/json
               name: id
@@ -72,7 +72,6 @@ openapi:
           tags:
             - a
             - b
-#            - users
           returns:
             - code: 201
               msg: success

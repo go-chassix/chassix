@@ -18,7 +18,7 @@ func init() {
 type Config struct {
 	App       AppConfig
 	Databases []*DatabaseConfig `yaml:"databases,flow"`
-	OpenAPI   OpenAPIConfig     `yaml:"openapi"`
+	OpenAPI   *OpenAPIConfig    `yaml:"openapi"`
 	Server    ServerConfig      `yaml:"server"`
 	Logging   LoggingConfig     `yaml:"logging"`
 	Mails     []MailConfig      `yaml:"mail,flow"`
@@ -97,7 +97,7 @@ func Server() ServerConfig {
 }
 
 //OpenAPI openapi config
-func Openapi() OpenAPIConfig {
+func Openapi() *OpenAPIConfig {
 	return config.OpenAPI
 }
 

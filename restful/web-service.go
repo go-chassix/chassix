@@ -41,7 +41,12 @@ func Add(ws *WebService) {
 
 func (ws *WebService) AddDocs() {
 	if config.Openapi().Enabled {
-		apisCfg := config.Openapi().APIs
+		apisCfg := config.Openapi().Resources
+		if apisCfg != nil && len(apisCfg) > 0 {
+			apisCfg.CopyToMap()
+		} else {
+			return
+		}
 		routes := ws.Routes()
 		for i, route := range routes {
 			fmt.Printf("route %+v\n", route)
@@ -116,8 +121,13 @@ func (ws *WebService) AddDocs() {
 }
 
 func appendTags(route *emkRestful.Route, tags []string) {
+
+	if route.Metadata == nil {
+		route.Metadata = make(map[string]interface{})
+	}
 	existedTags, ok := route.Metadata[KeyOpenAPITags]
 	if !ok {
+		//route.Metadata[KeyOpenAPITags] = make([]string, 0)
 		existedTags = make([]string, 0)
 	}
 
