@@ -17,12 +17,12 @@ chassix-logging chassix日志模块。
 
 chassix-panel 提供docker、网关、配置等控制面板。
 
-chassix-logging
+## chassix-logging
 
 ``` shell
 go get c5x.io/logx
 ```
-chassix-bootstrap
+## chassix-bootstrap
 
 约定配置通过yaml定义，支持从ctrip apollo获取配置，配置文件namespace也仅支持yaml文件。
 
@@ -30,7 +30,7 @@ chassix-bootstrap
 go get c5x.io/bootstrap
 ```
 
-YAML文件配置
+### YAML文件配置
 ``` yaml
 app:
   name: chassix-bootstrap-example
@@ -46,7 +46,7 @@ logging:
   no-colors: true
   caller-first: true
 ```
-从apollo获取配置
+### 从apollo获取配置
 ```yaml
 apollo:
   enable: true
