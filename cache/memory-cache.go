@@ -10,7 +10,7 @@ import (
 	"github.com/go-chassix/chassix/v2/logx"
 )
 
-//MemoryCache implements cache store based or lru cache
+//MemoryCacheStore implements cache store based or lru cache
 type MemoryCacheStore struct {
 	cache     *lru.Cache
 	log       *logx.Entry
@@ -18,7 +18,7 @@ type MemoryCacheStore struct {
 	keyPrefix string
 }
 
-//NewMemoryCacheStore new memory cache store stored spec size
+//NewMemoryCacheStore new memory cache store spec size
 func NewMemoryCacheStore(name string, valType interface{}, size int) (cache *MemoryCacheStore, err error) {
 
 	if name == "" {
@@ -38,7 +38,7 @@ func NewMemoryCacheStore(name string, valType interface{}, size int) (cache *Mem
 	return
 }
 
-//Set set a key/value to memory cache store
+//Set a key/value to memory cache store
 func (mcs *MemoryCacheStore) Set(key string, val interface{}) (ok bool) {
 	t := reflect.TypeOf(val)
 	if t != mcs.valType {
