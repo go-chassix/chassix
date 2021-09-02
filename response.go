@@ -1,10 +1,10 @@
 package chassix
 
 import (
-	"c6x.io/chassix.v2/restful"
 	emkRestful "github.com/emicklei/go-restful/v3"
+	"github.com/go-chassix/chassix/v2/restful"
 
-	"c6x.io/chassix.v2/apierrors"
+	"github.com/go-chassix/chassix/v2/apierrors"
 )
 
 //Entity response entity

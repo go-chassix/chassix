@@ -1,7 +1,7 @@
 package logx
 
 import (
-	"c6x.io/chassix.v2/config"
+	"github.com/go-chassix/chassix/v2/config"
 	"testing"
 )
 

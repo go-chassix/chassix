@@ -1,11 +1,11 @@
 package restful
 
 import (
-	"c6x.io/chassix.v2/config"
-	restFilters "c6x.io/chassix.v2/filters/rest"
-	"c6x.io/chassix.v2/logx"
 	restfulSpec "github.com/emicklei/go-restful-openapi/v2"
 	emkRestful "github.com/emicklei/go-restful/v3"
+	"github.com/go-chassix/chassix/v2/config"
+	restFilters "github.com/go-chassix/chassix/v2/filters/rest"
+	"github.com/go-chassix/chassix/v2/logx"
 	"net/http"
 	"reflect"
 	"strconv"

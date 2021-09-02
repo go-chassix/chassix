@@ -7,7 +7,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"github.com/stretchr/testify/assert"
 
-	"c6x.io/chassix.v2/config"
+	"github.com/go-chassix/chassix/v2/config"
 )
 
 func TestDBs(t *testing.T) {

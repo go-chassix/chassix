@@ -1,6 +1,6 @@
 package chassix
 
-import "c6x.io/chassix.v2/config"
+import "github.com/go-chassix/chassix/v2/config"
 
 const (
 	//EnvPgTestDataFile import test data sql file

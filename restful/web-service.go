@@ -5,7 +5,7 @@ import (
 	emkRestful "github.com/emicklei/go-restful/v3"
 	"path"
 
-	"c6x.io/chassix.v2/config"
+	"github.com/go-chassix/chassix/v2/config"
 )
 
 //Webservice web service

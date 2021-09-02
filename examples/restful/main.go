@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 
-	"c6x.io/chassix.v2"
-	"c6x.io/chassix.v2/apierrors"
-	"c6x.io/chassix.v2/config"
-	"c6x.io/chassix.v2/restful"
+	"github.com/go-chassix/chassix/v2"
+	"github.com/go-chassix/chassix/v2/apierrors"
+	"github.com/go-chassix/chassix/v2/config"
+	"github.com/go-chassix/chassix/v2/restful"
 )
 
 func main() {

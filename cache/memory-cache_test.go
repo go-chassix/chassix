@@ -3,7 +3,7 @@ package cache
 import (
 	"testing"
 
-	"c6x.io/chassix.v2/config"
+	"github.com/go-chassix/chassix/v2/config"
 	"github.com/stretchr/testify/assert"
 )
 

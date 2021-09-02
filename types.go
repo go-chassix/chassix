@@ -1,6 +1,6 @@
 package chassix
 
-import "c6x.io/chassix.v2/apierrors"
+import "github.com/go-chassix/chassix/v2/apierrors"
 
 //BaseDTO Data Transfer Object
 type BaseDTO struct {

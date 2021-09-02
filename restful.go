@@ -8,9 +8,9 @@ import (
 	"github.com/emicklei/go-restful/v3"
 	"github.com/go-openapi/spec"
 
-	"c6x.io/chassix.v2/config"
-	restFilters "c6x.io/chassix.v2/filters/rest"
-	"c6x.io/chassix.v2/logx"
+	"github.com/go-chassix/chassix/v2/config"
+	restFilters "github.com/go-chassix/chassix/v2/filters/rest"
+	"github.com/go-chassix/chassix/v2/logx"
 )
 
 const (

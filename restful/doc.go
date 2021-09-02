@@ -1,8 +1,8 @@
 package restful
 
 import (
-	"c6x.io/chassix.v2/config"
 	restfulSpec "github.com/emicklei/go-restful-openapi/v2"
+	"github.com/go-chassix/chassix/v2/config"
 	"github.com/go-openapi/spec"
 )
 

@@ -1,4 +1,5 @@
-module c6x.io/chassix.v2
+module github.com/go-chassix/chassix/v2
+
 
 go 1.13
 

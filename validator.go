@@ -11,7 +11,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	zhTranslation "github.com/go-playground/validator/v10/translations/zh"
 
-	"c6x.io/chassix.v2/apierrors"
+	"github.com/go-chassix/chassix/v2/apierrors"
 )
 
 var (

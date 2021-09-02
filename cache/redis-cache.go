@@ -8,9 +8,9 @@ import (
 	"reflect"
 	"time"
 
-	"c6x.io/chassix.v2"
-	"c6x.io/chassix.v2/config"
-	"c6x.io/chassix.v2/logx"
+	"github.com/go-chassix/chassix/v2"
+	"github.com/go-chassix/chassix/v2/config"
+	"github.com/go-chassix/chassix/v2/logx"
 )
 
 //RedisCacheStore based redis implement cache store
