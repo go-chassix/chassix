@@ -22,7 +22,7 @@ type RedisCacheStore struct {
 	redisCfg    *config.RedisConfig
 }
 
-//Get get value from redis cache store
+//Get value from redis cache store
 func (rc *RedisCacheStore) Get(key string) (val interface{}, ok bool) {
 	ctx := context.Background()
 	valPtr := reflect.New(rc.valType)
